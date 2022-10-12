@@ -52,9 +52,26 @@
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:text="1. Keep soil under the plants \n2. Use Organic fertilizers \n3. Don't use chemical sprays \n Don't use injections for fruits"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
 
                         </LinearLayout>
+
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

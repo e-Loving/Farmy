@@ -6,6 +6,6 @@ import android.os.Bundle
 class CommonRemedies : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.ccommon_remedies)
+        setContentView(R.layout.common_remedies)
     }
 }

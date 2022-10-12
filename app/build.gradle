@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'uz.eloving.plantdiseasedetection'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "uz.eloving.plantdiseasedetection"
-        minSdk 21
-        targetSdk 32
+        minSdk 29
+        targetSdk 33
         multiDexEnabled true
         versionCode 1
         versionName "1.0"
@@ -41,7 +41,6 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -51,9 +50,8 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:1.14.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.github.razir.progressbutton:progressbutton:2.1.0'
-//    implementation 'com.infideap.drawerbehavior:drawer-behavior:1.0.1'
-    implementation 'androidx.core:core-ktx:1.0.1'
-//    implementation 'com.github.ibrahimsn98:SmoothBottonBar:1.7.5'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.github.ibrahimsn98:SmoothBottonBar:1.7.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.5.2'
     implementation 'androidx.navigation:navigation-ui:2.5.2'

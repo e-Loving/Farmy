@@ -87,11 +87,12 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == mCameraRequestCode) {
+        if (requestCode == mCameraRequestCode) {
             if (resultCode == Activity.RESULT_OK && data != null) {
                 mBitmap = data.extras!!.get("data") as Bitmap
 //                mBitmap = scaleImage(mBitmap)
                 binding.mPhotoImageView.setImageBitmap(mBitmap)
+                Toast.makeText(this@MainActivity, "response", Toast.LENGTH_SHORT).show()
                 binding.mResultTextView.text = "You photo image set now"
             } else {
                 Toast.makeText(this@MainActivity, "Camera cancelled", Toast.LENGTH_SHORT).show()

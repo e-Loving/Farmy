@@ -1,17 +1,21 @@
 package uz.eloving.plantdiseasedetection
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
+import android.graphics.Matrix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toolbar
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.app_bar_main.*
+import android.os.Handler
+import android.provider.MediaStore
+import android.widget.Toast
+import me.ibrahimsn.lib.OnItemSelectedListener
+import me.ibrahimsn.lib.SmoothBottomBar
+import uz.eloving.plantdiseasedetection.databinding.ActivityMainBinding
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,52 +23,100 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBitmap: Bitmap
     private val mCameraRequestCode = 0
     private val mGalleryRequestCode = 2
-    private val inputSize = 224
-    private val mModelPath = "plant_disease_model.tfLite"
+    private val mInputSize = 224
+    private val mModelPath = "plant_disease_model.tflite"
     private val mLabelPath = "plant_labels.txt"
-
     private val mSamplePath = "automn.jpg"
-    lateinit var toolbar: Toolbar
-    lateinit var drawer: DrawerLayout
-    lateinit var navigationView: NavigationView
+    private lateinit var binding: ActivityMainBinding
 
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        navigationView = findViewById<View>(R.id.nav_views) as NavigationView
-        toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
-        drawer.setViewScale(GravityCompat.START, 0.9f)
-
-
-        val toggle = ActionBarDrawerToggle(
-            this, drawer, toolbar, 0, 0
-        )
-        drawer.addDrawerListener(toggle)
-        toggle.syncState()
-        navigationView.setNavigationItemSelectedListener(this)
-        drawer.setViewElevation(GravityCompat.START, Color.TRANSPARENT)
-        drawer.drawerElevation(GravityCompat.START, 20f)
-        drawer.setContrastThreshold(3f)
-        drawer.setRadious(GravityCompat.START, 25f)
-        drawer.useCustomBehaviour(GravityCompat.START)
-        drawer.useCustomBehaviour(GravityCompat.END)
-        val headerview = navigationView.getHeaderView(0)
-
-        mCategorization = Categorization(assets, mModelPath, mLabelPath, inputSize)
-
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        mCategorization = Categorization(assets, mModelPath, mLabelPath, mInputSize)
         resources.assets.open(mSamplePath).use {
-            mBitmap=BitmapFactory.decodeStream(it)
-            mBitmap=Bitmap.createScaledBitmap(mBitmap,inputSize,inputSize,TR)
-         mPhotoImageView.setImageBitmap(mBitmap)
-
-
-
+            mBitmap = BitmapFactory.decodeStream(it)
+            mBitmap = Bitmap.createScaledBitmap(mBitmap, mInputSize, mInputSize, true)
+            binding.mPhotoImageView.setImageBitmap(mBitmap)
         }
-val bottomNav:SmoothBottombar=findViewById<SmoothBottomBar>(R.id.bottom_nav)
+        val bottomnav = findViewById<SmoothBottomBar>(R.id.bottom_nav)
+        bottomnav.setOnItemReselectedListener {
+            object : OnItemSelectedListener {
+                override fun onItemSelect(pos: Int): Boolean {
+                    when (pos) {
+                        1 -> {
+                            startActivity(Intent(this@MainActivity, CommonRemedies::class.java))
+                            return true
+                        }
+                        2 -> {
+                            startActivity(Intent(this@MainActivity, AboutUs::class.java))
+                            return true
+                        }
+                    }
+                    return false
+                }
+            }
+        }
+        binding.mCameraButton.setOnClickListener {
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(cameraIntent, mCameraRequestCode)
+        }
+        binding.mGalleryButton.setOnClickListener {
+            val callGalleryIntent = Intent(Intent.ACTION_PICK)
+            callGalleryIntent.type = "image/*"
+            startActivityForResult(callGalleryIntent, mGalleryRequestCode)
+        }
+        binding.mDetectButton.setOnClickListener {
+            val progressDialog = ProgressDialog(this@MainActivity)
+            progressDialog.setTitle("Please wait")
+            progressDialog.setMessage("Wait there I doing something")
+            progressDialog.show()
+            val handler = Handler()
+            handler.postDelayed({
+                progressDialog.dismiss()
+                val results = mCategorization.recognizeImages(mBitmap).firstOrNull()
+                binding.mResultTextView.text = results?.title + "\n Confidence:" + results?.confidence
+            }, 2000)
+        }
 
     }
+
+    @SuppressLint("SetTextI18n")
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == mCameraRequestCode) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                mBitmap = data.extras!!.get("data") as Bitmap
+//                mBitmap = scaleImage(mBitmap)
+                binding.mPhotoImageView.setImageBitmap(mBitmap)
+                binding.mResultTextView.text = "You photo image set now"
+            } else {
+                Toast.makeText(this@MainActivity, "Camera cancelled", Toast.LENGTH_SHORT).show()
+            }
+        } else if (requestCode == mGalleryRequestCode) {
+            if (data != null) {
+                val uri = data.data
+                try {
+                    mBitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, uri)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+//                mBitmap = scaleImage(mBitmap)
+                binding.mPhotoImageView.setImageBitmap(mBitmap)
+            }
+        }
+    }
+
+//    private fun scaleImage(bitmap: Bitmap): Bitmap {
+//        val originalWidth = bitmap.width
+//        val originalHeight = bitmap.height
+//        val scaleWidth = mInputSize.toFloat()
+//        val scaleHeight = mInputSize.toFloat()
+//        val matrix = Matrix()
+//        matrix.postScale(scaleWidth, scaleHeight)
+//        return Bitmap.createBitmap(bitmap, 0, 0, originalWidth, originalHeight, matrix, true)
+//    }
 }

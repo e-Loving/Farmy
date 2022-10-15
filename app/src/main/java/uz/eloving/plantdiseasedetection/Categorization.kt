@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import org.tensorflow.lite.Interpreter
 import java.io.FileInputStream
 import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 import java.util.PriorityQueue
@@ -40,12 +41,12 @@ class Categorization(
 
     init {
         PITNR = Interpreter(loadModelFile(assetManager, modelPath))
-        ROW_LINE = loadlableList(assetManager, labelPath)
+        ROW_LINE = loadableList(assetManager, labelPath)
 
 
     }
 
-    private fun loadlableList(assetManager: AssetManager, labelPath: String): List<String> {
+    private fun loadableList(assetManager: AssetManager, labelPath: String): List<String> {
 
 
         return assetManager.open(labelPath).bufferedReader().useLines { it.toList() }
@@ -72,45 +73,55 @@ class Categorization(
         return getSortedResult(result)
     }
 
-    private fun getSortedResult(result: Array<FloatArray>): List<uz.eloving.plantdiseasedetection.Categorization.Categorization> {
+    private fun getSortedResult(result: Array<FloatArray>): List<Categorization> {
         val pq = PriorityQueue(GREAT_OUTCOME_MXX,
-            kotlin.Comparator<uz.eloving.plantdiseasedetection.Categorization.Categorization> {
-                (_,_,confidence1),(_,_,confidence2)->java.lang.Float.compare(confidence1,confidence2)*-1
-
+            kotlin.Comparator<Categorization> { (_, _, confidence1), (_, _, confidence2) ->
+                confidence1.compareTo(confidence2) * -1
             }
         )
-        for(i in ROW_LINE.indices){
-           val confidence=result[0][1]
-            if (confidence>=POINT_THRHOLD){
-                pq.add(uz.eloving.plantdiseasedetection.Categorization.Categorization(
-                    ""+i,
-               if (ROW_LINE.size>1)ROW_LINE[i] else "Unknown",confidence
-                ))
+        for (i in ROW_LINE.indices) {
+            val confidence = result[0][1]
+            if (confidence >= POINT_THRHOLD) {
+                pq.add(
+                    Categorization(
+                        ""+i,
+                        if (ROW_LINE.size > 1) ROW_LINE[i] else "Unknown", confidence
+                    )
+                )
 
             }
         }
-        val recognitions=ArrayList<uz.eloving.plantdiseasedetection.Categorization.Categorization>()
-        val recognitionsSize=Math.min(pq.size,GREAT_OUTCOME_MXX)
-          for(i in 0 until  recognitionsSize){
-              recognitions.add(pq.poll())
-          }
+        val recognitions = ArrayList<Categorization>()
+        val recognitionsSize = pq.size.coerceAtMost(GREAT_OUTCOME_MXX)
+        for (i in 0 until recognitionsSize) {
+            pq.poll()?.let { recognitions.add(it) }
+        }
 
         return recognitions
     }
 
     private fun convertBitmapToByteBuffer(scaledBitmap: Bitmap?): ByteBuffer {
-        val byteBuffer = ByteBuffer.allocateDirect(4 * GVN_INP_SZ * GVN_INP_SZ)
+        val byteBuffer = ByteBuffer.allocateDirect(4 * GVN_INP_SZ * GVN_INP_SZ * IMAGE_PXL_SZ)
+        byteBuffer.order(ByteOrder.nativeOrder())
         val intValue = IntArray(GVN_INP_SZ * GVN_INP_SZ)
 
-        scaledBitmap!!.getPixels(intValue, 0, scaledBitmap.width, 0, 0,scaledBitmap.width, scaledBitmap.height)
+        scaledBitmap!!.getPixels(
+            intValue,
+            0,
+            scaledBitmap.width,
+            0,
+            0,
+            scaledBitmap.width,
+            scaledBitmap.height
+        )
         var pixel = 0
         for (i in 0 until GVN_INP_SZ) {
             for (j in 0 until GVN_INP_SZ) {
                 val `val` = intValue[pixel++]
 
-                byteBuffer.putFloat((((`val`.shr(16) and 0xFF) / PHOTO_MEN) / PHOTO_SDEVIATE))
-                byteBuffer.putFloat((((`val`.shr(8) and 0xFF) / PHOTO_MEN) / PHOTO_SDEVIATE))
-                byteBuffer.putFloat((((`val` and 0xFF) / PHOTO_MEN) / PHOTO_SDEVIATE))
+                byteBuffer.putFloat((((`val`.shr(16) and 0xFF) - PHOTO_MEN) / PHOTO_SDEVIATE))
+                byteBuffer.putFloat((((`val`.shr(8) and 0xFF) - PHOTO_MEN) / PHOTO_SDEVIATE))
+                byteBuffer.putFloat((((`val` and 0xFF) - PHOTO_MEN) / PHOTO_SDEVIATE))
             }
         }
         return byteBuffer

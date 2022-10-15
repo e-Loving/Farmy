@@ -17,7 +17,7 @@ class Categorization(
     inputSize: Int,
 ) {
     private val GVN_INP_SZ: Int = inputSize
-    private val PHOTO_SDEVIATE = 225.0f
+    private val PHOTO_SDEVIATE = 255.0f
     private val GREAT_OUTCOME_MXX = 3
     private val PITNR: Interpreter
     private val ROW_LINE: List<String>
@@ -80,7 +80,7 @@ class Categorization(
             }
         )
         for (i in ROW_LINE.indices) {
-            val confidence = result[0][1]
+            val confidence = result[0][i]
             if (confidence >= POINT_THRHOLD) {
                 pq.add(
                     Categorization(

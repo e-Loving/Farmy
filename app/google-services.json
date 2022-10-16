@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "751770024792",
+    "project_id": "sign-in-f884e",
+    "storage_bucket": "sign-in-f884e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751770024792:android:4cac18ff4726e48f14032d",
+        "android_client_info": {
+          "package_name": "uz.eloving.egarden"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751770024792-gp14gu7goujat52g6tjcbucu837r2l26.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.eloving.egarden",
+            "certificate_hash": "7995e35cba9448cb971d89c20479e70e2d7d9249"
+          }
+        },
+        {
+          "client_id": "751770024792-bq48v5p9dkh5nstjjn0notku7fd8auf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ6g7nrfKtMvNCsX4te44Obr6KucMIirw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751770024792-bq48v5p9dkh5nstjjn0notku7fd8auf5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

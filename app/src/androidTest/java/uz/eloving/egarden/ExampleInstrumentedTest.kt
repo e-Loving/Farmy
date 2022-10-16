@@ -1,4 +1,4 @@
-package uz.eloving.plantdiseasedetection
+package uz.eloving.egarden
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

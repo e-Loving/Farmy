@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
-rootProject.name = "Plant Disease Detection"
+rootProject.name = "eGarden"
 include ':app'

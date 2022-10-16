@@ -1,4 +1,4 @@
-package uz.eloving.plantdiseasedetection
+package uz.eloving.egarden
 
 import android.content.res.AssetManager
 import android.graphics.Bitmap

@@ -1,4 +1,4 @@
-package uz.eloving.plantdiseasedetection
+package uz.eloving.egarden
 
 import org.junit.Test
 

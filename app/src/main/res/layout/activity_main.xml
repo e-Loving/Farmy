@@ -19,7 +19,7 @@
             android:background="@drawable/card_viewe">
 
             <Button
-                android:id="@+id/mCameraButton"
+                android:id="@+id/btn_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="22dp"
@@ -27,12 +27,12 @@
                 android:padding="13dp"
                 android:text="Camera"
                 android:textColor="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="@+id/mDetectButton"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_detect"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mDetectButton" />
+                app:layout_constraintTop_toTopOf="@+id/btn_detect" />
 
             <Button
-                android:id="@+id/mGalleryButton"
+                android:id="@+id/btn_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="22dp"
@@ -40,39 +40,38 @@
                 android:padding="13dp"
                 android:text="Gallery"
                 android:textColor="#FFFFFF"
-                app:layout_constraintBottom_toTopOf="@+id/mResultTextView"
+                app:layout_constraintBottom_toTopOf="@+id/tv_result"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mPhotoImageView" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_main" />
 
             <ImageView
-                android:id="@+id/mPhotoImageView"
+                android:id="@+id/iv_main"
                 android:layout_width="270dp"
                 android:layout_height="270dp"
                 android:layout_marginTop="78dp"
                 android:background="@drawable/img_v"
                 android:contentDescription="View Display Image"
                 android:scaleType="fitXY"
-                android:src="@drawable/automn"
+                android:src="@drawable/autumn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/mDetectButton"
+                android:id="@+id/btn_detect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:background="@drawable/custom_button"
                 android:padding="13dp"
                 android:text="Detect"
                 android:textColor="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="@+id/mGalleryButton"
-                app:layout_constraintEnd_toStartOf="@+id/mCameraButton"
-                app:layout_constraintStart_toEndOf="@+id/mGalleryButton"
-                app:layout_constraintTop_toTopOf="@+id/mGalleryButton" />
+                app:layout_constraintBottom_toBottomOf="@+id/btn_gallery"
+                app:layout_constraintEnd_toStartOf="@+id/btn_camera"
+                app:layout_constraintStart_toEndOf="@+id/btn_gallery"
+                app:layout_constraintTop_toTopOf="@+id/btn_gallery" />
 
             <TextView
-                android:id="@+id/mResultTextView"
+                android:id="@+id/tv_result"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="140dp"
@@ -84,7 +83,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mPhotoImageView" />
+                app:layout_constraintTop_toBottomOf="@id/iv_main" />
 
 
 

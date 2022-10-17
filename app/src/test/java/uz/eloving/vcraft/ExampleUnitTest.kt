@@ -1,4 +1,4 @@
-package uz.eloving.egarden
+package uz.eloving.vcraft
 
 import org.junit.Test
 

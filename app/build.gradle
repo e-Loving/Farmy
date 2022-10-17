@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'uz.eloving.egarden'
+    namespace 'uz.eloving.vcraft'
     compileSdk 33
 
     defaultConfig {
-        applicationId "uz.eloving.egarden"
+        applicationId "uz.eloving.vcraft"
         minSdk 21
         targetSdk 33
         multiDexEnabled true
@@ -63,5 +63,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation "com.tbuonomo:dotsindicator:4.3"
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
 
 }

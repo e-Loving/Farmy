@@ -1,4 +1,4 @@
-package uz.eloving.egarden
+package uz.eloving.vcraft
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
-import uz.eloving.egarden.databinding.ActivityMainBinding
+import uz.eloving.vcraft.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

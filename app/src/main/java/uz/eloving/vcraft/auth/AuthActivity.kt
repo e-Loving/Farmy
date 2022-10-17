@@ -1,4 +1,4 @@
-package uz.eloving.egarden
+package uz.eloving.vcraft.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,8 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import uz.eloving.egarden.databinding.ActivityAuthBinding
+import uz.eloving.vcraft.MainActivity
+import uz.eloving.vcraft.databinding.ActivityAuthBinding
 import java.util.concurrent.TimeUnit
 
 class AuthActivity : AppCompatActivity() {

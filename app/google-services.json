@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:751770024792:android:4cac18ff4726e48f14032d",
         "android_client_info": {
-          "package_name": "uz.eloving.egarden"
+          "package_name": "uz.eloving.vcraft"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "751770024792-gp14gu7goujat52g6tjcbucu837r2l26.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "uz.eloving.egarden",
+            "package_name": "uz.eloving.vcraft",
             "certificate_hash": "7995e35cba9448cb971d89c20479e70e2d7d9249"
           }
         },

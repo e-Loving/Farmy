@@ -38,7 +38,7 @@ android {
     aaptOptions {
         noCompress "tfLite"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 }
@@ -66,6 +66,9 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation "com.tbuonomo:dotsindicator:4.3"
     implementation 'com.airbnb.android:lottie:5.2.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 
 }

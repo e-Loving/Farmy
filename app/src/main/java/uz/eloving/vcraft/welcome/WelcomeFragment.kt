@@ -21,6 +21,15 @@ class WelcomeFragment(private val all: UIModule) : Fragment() {
         binding.lottieAnimationView.setAnimation(all.lottie_animation)
         binding.tvDescription.text = all.description
         binding.tvTitle.text = all.title
+        binding.btnNext.visibility = if (all.nextButtonVisibility) View.VISIBLE else View.GONE
+        binding.btnNext.setOnClickListener {
+            startActivity(
+                Intent(
+                    context,
+                    AuthActivity::class.java
+                )
+            )
+        }
         return binding.root
     }
 }

@@ -1,15 +1,14 @@
-package uz.eloving.vcraft.welcome
+package uz.eloving.farmy.welcome
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import uz.eloving.vcraft.auth.AuthActivity
-import uz.eloving.vcraft.model.UIModule
-import uz.eloving.vcraft.databinding.FragmentWelcomeBinding
+import uz.eloving.farmy.auth.AuthActivity
+import uz.eloving.farmy.model.UIModule
+import uz.eloving.farmy.databinding.FragmentWelcomeBinding
 
 class WelcomeFragment(private val all: UIModule) : Fragment() {
     private lateinit var binding: FragmentWelcomeBinding

@@ -1,7 +1,7 @@
-package uz.eloving.vcraft.data
+package uz.eloving.farmy.data
 
-import uz.eloving.vcraft.R
-import uz.eloving.vcraft.model.UIModule
+import uz.eloving.farmy.R
+import uz.eloving.farmy.model.UIModule
 
 class MockData {
     companion object {

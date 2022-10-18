@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'uz.eloving.vcraft'
+    namespace 'uz.eloving.farmy'
     compileSdk 33
 
     defaultConfig {
-        applicationId "uz.eloving.vcraft"
+        applicationId "uz.eloving.farmy"
         minSdk 21
         targetSdk 33
         multiDexEnabled true
@@ -85,5 +85,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.1.0'
     // Storage
     implementation 'com.google.firebase:firebase-storage:20.1.0'
+    // PinView
+    implementation 'io.github.chaosleung:pinview:1.4.4'
+    // MaskView
+    implementation 'io.github.vicmikhailau:MaskedEditText:4.0.7'
+    //OnBackPressed
+    implementation 'androidx.appcompat:appcompat:1.7.0-alpha01'
 
 }

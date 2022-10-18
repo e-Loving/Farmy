@@ -1,4 +1,4 @@
-package uz.eloving.vcraft.ui
+package uz.eloving.farmy.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -15,9 +15,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import uz.eloving.vcraft.data.PrefManager
-import uz.eloving.vcraft.databinding.FragmentShopBinding
-import uz.eloving.vcraft.model.ShopItemModel
+import uz.eloving.farmy.data.PrefManager
+import uz.eloving.farmy.databinding.FragmentShopBinding
+import uz.eloving.farmy.model.ShopItemModel
 
 
 class ShopFragment : Fragment() {

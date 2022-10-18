@@ -1,9 +1,9 @@
-package uz.eloving.vcraft.welcome
+package uz.eloving.farmy.welcome
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import uz.eloving.vcraft.data.MockData
+import uz.eloving.farmy.data.MockData
 
 class WelcomeFragmentAdapter(fragment: FragmentActivity) :
     FragmentStateAdapter(fragment) {

@@ -1,23 +1,24 @@
 {
   "project_info": {
     "project_number": "127306430163",
+    "firebase_url": "https://v-craft-default-rtdb.firebaseio.com",
     "project_id": "v-craft",
     "storage_bucket": "v-craft.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:127306430163:android:883ffe3abc9d2a36f40626",
+        "mobilesdk_app_id": "1:127306430163:android:104238e358680806f40626",
         "android_client_info": {
-          "package_name": "uz.eloving.vcraft"
+          "package_name": "uz.eloving.farmy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "127306430163-ms16bfo27j71f994d06oo43umcf4qk4k.apps.googleusercontent.com",
+          "client_id": "127306430163-b6fb0pj9digmjplf0qisumhej2m8m3t8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "uz.eloving.vcraft",
+            "package_name": "uz.eloving.farmy",
             "certificate_hash": "7995e35cba9448cb971d89c20479e70e2d7d9249"
           }
         },

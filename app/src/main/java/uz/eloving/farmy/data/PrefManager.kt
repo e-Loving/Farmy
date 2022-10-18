@@ -1,4 +1,4 @@
-package uz.eloving.vcraft.data
+package uz.eloving.farmy.data
 
 import android.content.Context
 import android.content.SharedPreferences

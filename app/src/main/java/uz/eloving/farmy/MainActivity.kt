@@ -1,18 +1,11 @@
-package uz.eloving.vcraft
+package uz.eloving.farmy
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.PopupMenu
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import uz.eloving.vcraft.databinding.ActivityMainBinding
+import uz.eloving.farmy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

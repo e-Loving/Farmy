@@ -1,4 +1,4 @@
-package uz.eloving.vcraft
+package uz.eloving.farmy
 
 import android.content.res.AssetManager
 import android.graphics.Bitmap

@@ -1,4 +1,4 @@
-package uz.eloving.vcraft
+package uz.eloving.farmy
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,4 +1,4 @@
-package uz.eloving.vcraft.auth
+package uz.eloving.farmy.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,9 +9,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import uz.eloving.vcraft.MainActivity
-import uz.eloving.vcraft.data.PrefManager
-import uz.eloving.vcraft.databinding.ActivityAuthBinding
+import uz.eloving.farmy.databinding.ActivityAuthBinding
 import java.util.concurrent.TimeUnit
 
 class AuthActivity : AppCompatActivity() {
@@ -24,18 +22,17 @@ class AuthActivity : AppCompatActivity() {
         setContentView(binding.root)
         FirebaseApp.initializeApp(this)
         auth = FirebaseAuth.getInstance()
-        if (PrefManager.getUID(this) != "uid") {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("uid", PrefManager.getUID(this))
-            startActivity(intent)
+        binding.ivBack.setOnClickListener {
+            onBackPressed()
         }
         binding.sendOTPBtn.setOnClickListener {
             number = binding.etPhoneNumber.text?.trim().toString()
             if (number.isNotEmpty()) {
-                if (number.length == 9) {
-                    number = "+998$number"
+                if (number.length == 17) {
+                    var tempNumber = ""
+                    number.forEach { if (it in '0'..'9') tempNumber += it.toString() }
                     val options = PhoneAuthOptions.newBuilder(auth)
-                        .setPhoneNumber(number)       // Phone number to verify
+                        .setPhoneNumber("+$tempNumber")       // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(this)                 // Activity (for callback binding)
                         .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
@@ -72,7 +69,7 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun sendToMain() {
-        startActivity(Intent(this, VerificationActivity::class.java))
+        startActivity(Intent(this, CodeConfirmationActivity::class.java))
     }
 
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {

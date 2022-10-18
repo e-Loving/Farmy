@@ -1,4 +1,4 @@
-package uz.eloving.vcraft.auth
+package uz.eloving.farmy.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +8,9 @@ import android.widget.Toast
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import uz.eloving.vcraft.MainActivity
-import uz.eloving.vcraft.data.PrefManager
-import uz.eloving.vcraft.databinding.ActivityCodeConfirmationBinding
+import uz.eloving.farmy.MainActivity
+import uz.eloving.farmy.data.PrefManager
+import uz.eloving.farmy.databinding.ActivityCodeConfirmationBinding
 import java.util.concurrent.TimeUnit
 
 class CodeConfirmationActivity : AppCompatActivity() {
@@ -29,10 +29,10 @@ class CodeConfirmationActivity : AppCompatActivity() {
         phoneNumber = intent.getStringExtra("phoneNumber")!!
 
 
-
-        binding.verifyOTPBtn.setOnClickListener {
+        binding.ivBack.setOnClickListener { onBackPressed() }
+        binding.btnVerify.setOnClickListener {
             //collect otp from all the edit texts
-            val typedOTP = binding.etPassword.text
+            val typedOTP = binding.etPinView.text!!
 
             if (typedOTP.isNotEmpty()) {
                 if (typedOTP.length == 6) {

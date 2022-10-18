@@ -1,15 +1,11 @@
-package uz.eloving.vcraft.welcome
+package uz.eloving.farmy.welcome
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.DragEvent
-import android.view.MotionEvent
-import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import uz.eloving.vcraft.R
-import uz.eloving.vcraft.auth.AuthActivity
-import uz.eloving.vcraft.databinding.ActivityWelcomeBinding
+import uz.eloving.farmy.MainActivity
+import uz.eloving.farmy.data.PrefManager
+import uz.eloving.farmy.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : FragmentActivity() {
     private lateinit var adapter: WelcomeFragmentAdapter
@@ -18,6 +14,11 @@ class WelcomeActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (PrefManager.getUID(this) != "uid") {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("uid", PrefManager.getUID(this))
+            startActivity(intent)
+        }
         adapter = WelcomeFragmentAdapter(this)
         binding.viewPager2.adapter = adapter
         binding.dots.attachTo(binding.viewPager2)

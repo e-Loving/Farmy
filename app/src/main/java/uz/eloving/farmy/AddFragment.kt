@@ -1,11 +1,11 @@
-package uz.eloving.vcraft
+package uz.eloving.farmy
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import uz.eloving.vcraft.databinding.FragmentAddBinding
+import uz.eloving.farmy.databinding.FragmentAddBinding
 
 class AddFragment : DialogFragment() {
     private lateinit var binding: FragmentAddBinding

@@ -1,4 +1,4 @@
-package uz.eloving.vcraft.model
+package uz.eloving.farmy.model
 
 data class UIModule(
     val title: String,

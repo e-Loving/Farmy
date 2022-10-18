@@ -1,22 +1,19 @@
-package uz.eloving.vcraft.ui
+package uz.eloving.farmy.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import uz.eloving.vcraft.R
-import uz.eloving.vcraft.databinding.FragmentJobsBinding
+import uz.eloving.farmy.databinding.FragmentGardenBinding
 
-class JobsFragment : Fragment() {
-    private lateinit var binding: FragmentJobsBinding
+class GardenFragment : Fragment() {
+    private lateinit var binding: FragmentGardenBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentJobsBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
+        binding = FragmentGardenBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 }

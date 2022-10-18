@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_shop">
+    <fragment
+        android:id="@+id/navigation_shop"
+        android:name="uz.eloving.vcraft.ui.ShopFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_shop" />
+
+    <fragment
+        android:id="@+id/navigation_garden"
+        android:name="uz.eloving.vcraft.ui.GardenFragment"
+        android:label="Garden"
+        tools:layout="@layout/fragment_garden" />
+
+    <fragment
+        android:id="@+id/navigation_jobs"
+        android:name="uz.eloving.vcraft.ui.JobsFragment"
+        android:label="Jobs"
+        tools:layout="@layout/fragment_jobs" />
+</navigation>

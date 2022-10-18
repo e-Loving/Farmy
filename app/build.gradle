@@ -66,6 +66,14 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation "com.tbuonomo:dotsindicator:4.3"
     implementation 'com.airbnb.android:lottie:5.2.0'
+    //pinView
+    implementation 'io.github.chaosleung:pinview:1.4.4'
+
+    //MaskedEditText
+    implementation "io.github.vicmikhailau:MaskedEditText:4.0.7"
+//circleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 
 }

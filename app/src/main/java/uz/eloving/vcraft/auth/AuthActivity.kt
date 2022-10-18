@@ -24,7 +24,7 @@ class AuthActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
         auth = FirebaseAuth.getInstance()
         binding.sendOTPBtn.setOnClickListener {
-            number = binding.phoneEditTextNumber.text.trim().toString()
+            number = binding.etPhoneNumber.text?.trim().toString()
             if (number.isNotEmpty()) {
                 if (number.length == 9) {
                     number = "+998$number"
@@ -66,7 +66,7 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun sendToMain() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, VerificationActivity::class.java))
     }
 
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {

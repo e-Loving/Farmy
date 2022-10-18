@@ -10,6 +10,7 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import uz.eloving.vcraft.MainActivity
+import uz.eloving.vcraft.data.PrefManager
 import uz.eloving.vcraft.databinding.ActivityAuthBinding
 import java.util.concurrent.TimeUnit
 
@@ -23,6 +24,11 @@ class AuthActivity : AppCompatActivity() {
         setContentView(binding.root)
         FirebaseApp.initializeApp(this)
         auth = FirebaseAuth.getInstance()
+        if (PrefManager.getUID(this) != "uid") {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("uid", PrefManager.getUID(this))
+            startActivity(intent)
+        }
         binding.sendOTPBtn.setOnClickListener {
             number = binding.phoneEditTextNumber.text.trim().toString()
             if (number.isNotEmpty()) {
@@ -98,10 +104,6 @@ class AuthActivity : AppCompatActivity() {
             verificationId: String,
             token: PhoneAuthProvider.ForceResendingToken
         ) {
-            // The SMS verification code has been sent to the provided phone number, we
-            // now need to ask the user to enter the code and then construct a credential
-            // by combining the code with a verification ID.
-            // Save verification ID and resending token so we can use them later
             val intent = Intent(this@AuthActivity, CodeConfirmationActivity::class.java)
             intent.putExtra("OTP", verificationId)
             intent.putExtra("resendToken", token)

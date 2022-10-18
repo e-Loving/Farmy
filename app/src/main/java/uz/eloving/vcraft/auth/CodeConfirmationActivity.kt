@@ -9,6 +9,7 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import uz.eloving.vcraft.MainActivity
+import uz.eloving.vcraft.data.PrefManager
 import uz.eloving.vcraft.databinding.ActivityCodeConfirmationBinding
 import java.util.concurrent.TimeUnit
 
@@ -104,7 +105,7 @@ class CodeConfirmationActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+                    PrefManager.saveUID(this, auth.currentUser?.uid.toString())
 
                     Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show()
                     sendToMain()

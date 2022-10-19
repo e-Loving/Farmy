@@ -1,42 +1,33 @@
 {
   "project_info": {
-    "project_number": "127306430163",
-    "firebase_url": "https://v-craft-default-rtdb.firebaseio.com",
-    "project_id": "v-craft",
-    "storage_bucket": "v-craft.appspot.com"
+    "project_number": "123631889639",
+    "project_id": "farmy-uz",
+    "storage_bucket": "farmy-uz.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:127306430163:android:104238e358680806f40626",
+        "mobilesdk_app_id": "1:123631889639:android:069ebfa02d906d4a230642",
         "android_client_info": {
           "package_name": "uz.eloving.farmy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "127306430163-b6fb0pj9digmjplf0qisumhej2m8m3t8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "uz.eloving.farmy",
-            "certificate_hash": "7995e35cba9448cb971d89c20479e70e2d7d9249"
-          }
-        },
-        {
-          "client_id": "127306430163-28t0lf584kdinaqld3f8spnn5ibubj12.apps.googleusercontent.com",
+          "client_id": "123631889639-ls471rl3e2e7pq9kcpvfp2drrad2h79t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAxllsRIeab6yVIv0cxMKAqP8eFbDEQBTw"
+          "current_key": "AIzaSyDEHfVVUozuVo3GI7jDtthsSKupHyvANdU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "127306430163-28t0lf584kdinaqld3f8spnn5ibubj12.apps.googleusercontent.com",
+              "client_id": "123631889639-ls471rl3e2e7pq9kcpvfp2drrad2h79t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

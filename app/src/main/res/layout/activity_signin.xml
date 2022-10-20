@@ -6,33 +6,136 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.SigninActivity">
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:hint="username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <ImageView
+        android:id="@+id/iv_backSignIn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/back_to_previous_page"
+        android:src="@drawable/ic_back"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:hint="password"
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="200dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/meta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@id/iv_backSignIn" />
 
-    <Button
-        android:id="@+id/sign"
+    <TextView
+        android:id="@+id/tv_titleLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="register"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter"
+        android:text="Login to Your Account"
+        android:textColor="@color/teal_200"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/iv_logo"
+        app:layout_constraintStart_toStartOf="@id/iv_logo"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+
+    <com.vicmikhailau.maskededittext.MaskedEditText
+        android:id="@+id/usernamelogin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/et_backgroundshape"
+        android:hint="username"
+        android:paddingStart="10dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_titleLogin"
+        app:layout_constraintStart_toStartOf="@id/tv_titleLogin"
+        app:layout_constraintTop_toBottomOf="@id/tv_titleLogin" />
+
+
+    <com.vicmikhailau.maskededittext.MaskedEditText
+        android:id="@+id/passwordlogin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/et_backgroundshape"
+        android:drawableRight="@drawable/ic_eye"
+        android:hint="password"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@id/usernamelogin"
+        app:layout_constraintStart_toStartOf="@id/usernamelogin"
+        app:layout_constraintTop_toBottomOf="@id/usernamelogin" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkboxlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Remember me"
+        android:textColor="@color/teal_200"
+        app:layout_constraintEnd_toEndOf="@id/passwordlogin"
+        app:layout_constraintStart_toStartOf="@id/passwordlogin"
+        app:layout_constraintTop_toBottomOf="@id/passwordlogin" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signlogin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/teal_200"
+        android:text="Sign in"
+        android:textSize="12sp"
+        app:cornerRadius="24dp"
+        app:layout_constraintEnd_toEndOf="@id/checkboxlogin"
+        app:layout_constraintStart_toStartOf="@id/checkboxlogin"
+        app:layout_constraintTop_toBottomOf="@id/checkboxlogin" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Forget your password"
+        android:textColor="@color/teal_200"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/signlogin"
+        app:layout_constraintStart_toStartOf="@+id/signlogin"
+        app:layout_constraintTop_toBottomOf="@id/signlogin" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2">
+
+        <TextView
+            android:id="@+id/tv_noAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? "
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_signIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/teal_200"
+            android:layout_marginStart="5dp"
+            android:text="Sign In "
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

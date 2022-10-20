@@ -17,10 +17,10 @@ class SigninActivity : AppCompatActivity() {
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
-        binding.sign.setOnClickListener {
+        binding.signlogin.setOnClickListener {
             auth.signInWithEmailAndPassword(
-                binding.username.text.toString() + "@gmail.com",
-                binding.password.text.toString()
+                binding.usernamelogin.text.toString() + "@gmail.com",
+                binding.passwordlogin.text.toString()
             )
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

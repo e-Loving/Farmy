@@ -32,7 +32,8 @@ class ShopFragment : Fragment() {
     ): View {
         binding = FragmentShopBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
-        binding.fabAdd.setOnClickListener { uploadInfo() }
+        val dialog = AddFragment()
+        binding.fabAdd.setOnClickListener { dialog.show(childFragmentManager, "Sotish") }
         return binding.root
     }
 

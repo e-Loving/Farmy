@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".ui.auth.AuthActivity">
 
     <TextView
@@ -61,7 +60,7 @@
         android:layout_marginBottom="30dp"
         android:backgroundTint="@color/teal_200"
         android:text="@string/tasdiqlash"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:cornerRadius="24dp"
         app:iconTint="@color/teal_200"
         app:layout_constraintBottom_toTopOf="@+id/registeredAccount"

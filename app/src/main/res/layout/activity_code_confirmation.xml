@@ -71,7 +71,6 @@
         android:hint="@string/______"
 
         android:inputType="number"
-        android:itemBackground="#F3EBEB"
         android:textSize="17sp"
         app:hideLineWhenFilled="true"
         app:itemCount="6"

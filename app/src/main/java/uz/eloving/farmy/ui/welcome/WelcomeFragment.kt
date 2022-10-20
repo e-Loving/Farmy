@@ -1,4 +1,4 @@
-package uz.eloving.farmy.welcome
+package uz.eloving.farmy.ui.welcome
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import uz.eloving.farmy.auth.AuthActivity
+import uz.eloving.farmy.ui.auth.AuthActivity
 import uz.eloving.farmy.model.UIModule
 import uz.eloving.farmy.databinding.FragmentWelcomeBinding
 

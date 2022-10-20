@@ -1,4 +1,4 @@
-package uz.eloving.farmy
+package uz.eloving.farmy.util
 
 import android.content.res.AssetManager
 import android.graphics.Bitmap

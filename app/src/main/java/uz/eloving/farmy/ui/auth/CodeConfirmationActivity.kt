@@ -1,10 +1,14 @@
-package uz.eloving.farmy.auth
+package uz.eloving.farmy.ui.auth
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -18,7 +22,11 @@ class CodeConfirmationActivity : AppCompatActivity() {
     private lateinit var otp: String
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var phoneNumber: String
+    private lateinit var tempNumber: String
+    private var isExpired = false
     private lateinit var binding: ActivityCodeConfirmationBinding
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCodeConfirmationBinding.inflate(layoutInflater)
@@ -27,37 +35,38 @@ class CodeConfirmationActivity : AppCompatActivity() {
         otp = intent.getStringExtra("OTP").toString()
         resendToken = intent.getParcelableExtra("resendToken")!!
         phoneNumber = intent.getStringExtra("phoneNumber")!!
-
-
+        tempNumber = intent.getStringExtra("tempNumber")!!
+        binding.phoneNumber.text = "Sizning telefon raqamingiz\n${phoneNumber}"
+        startTimer()
         binding.ivBack.setOnClickListener { onBackPressed() }
         binding.btnVerify.setOnClickListener {
-            //collect otp from all the edit texts
-            val typedOTP = binding.etPinView.text!!
-
-            if (typedOTP.isNotEmpty()) {
-                if (typedOTP.length == 6) {
-                    val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
-                        otp, typedOTP.toString()
-                    )
-                    signInWithPhoneAuthCredential(credential)
+            if (!isExpired) {
+                val typedOTP = binding.etPinView.text!!
+                if (typedOTP.isNotEmpty()) {
+                    if (typedOTP.length == 6) {
+                        val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(
+                            otp, typedOTP.toString()
+                        )
+                        signInWithPhoneAuthCredential(credential)
+                    } else {
+                        Toast.makeText(this, "Please Enter Correct OTP", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(this, "Please Enter Correct OTP", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please Enter OTP", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Please Enter OTP", Toast.LENGTH_SHORT).show()
+                resendVerificationCode()
             }
-
-
         }
     }
 
     private fun resendVerificationCode() {
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber)       // Phone number to verify
-            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-            .setActivity(this)                 // Activity (for callback binding)
+            .setPhoneNumber(tempNumber)
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setActivity(this)
             .setCallbacks(callbacks)
-            .setForceResendingToken(resendToken)// OnVerificationStateChangedCallbacks
+            .setForceResendingToken(resendToken)
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
@@ -65,37 +74,22 @@ class CodeConfirmationActivity : AppCompatActivity() {
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-            // This callback will be invoked in two situations:
-            // 1 - Instant verification. In some cases the phone number can be instantly
-            //     verified without needing to send or enter a verification code.
-            // 2 - Auto-retrieval. On some devices Google Play services can automatically
-            //     detect the incoming verification SMS and perform verification without
-            //     user action.
             signInWithPhoneAuthCredential(credential)
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-            // This callback is invoked in an invalid request for verification is made,
-            // for instance if the the phone number format is not valid.
-
             if (e is FirebaseAuthInvalidCredentialsException) {
-                // Invalid request
-                Log.d("TAG", "onVerificationFailed: ${e.toString()}")
+                Log.d("TAG", "onVerificationFailed: $e")
             } else if (e is FirebaseTooManyRequestsException) {
-                // The SMS quota for the project has been exceeded
-                Log.d("TAG", "onVerificationFailed: ${e.toString()}")
+                Log.d("TAG", "onVerificationFailed: $e")
             }
-            // Show a message and update the UI
         }
 
         override fun onCodeSent(
             verificationId: String,
             token: PhoneAuthProvider.ForceResendingToken
         ) {
-            // The SMS verification code has been sent to the provided phone number, we
-            // now need to ask the user to enter the code and then construct a credential
-            // by combining the code with a verification ID.
-            // Save verification ID and resending token so we can use them later
+            startTimer()
             otp = verificationId
             resendToken = token
         }
@@ -106,23 +100,44 @@ class CodeConfirmationActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     PrefManager.saveUID(this, auth.currentUser?.uid.toString())
-
                     Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show()
-                    sendToMain()
+                    sendToRegister()
                 } else {
-                    // Sign in failed, display a message and update the UI
+
                     Log.d("TAG", "signInWithPhoneAuthCredential: ${task.exception.toString()}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
+
                     }
-                    // Update UI
                 }
             }
     }
 
-    private fun sendToMain() {
-        startActivity(Intent(this, MainActivity::class.java))
+    private fun sendToRegister() {
+        val intent = Intent(this, RegistrationActivity::class.java)
+        intent.putExtra("phoneNumber", phoneNumber)
+        startActivity(intent)
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun startTimer() {
+        binding.btnVerify.text = "Tasdiqlash"
+        isExpired = false
+        val timer = object : CountDownTimer(60_000, 1_000) {
+            @SuppressLint("SetTextI18n")
+            override fun onTick(millisUntilFinished: Long) {
+                binding.tvResendCode.text =
+                    "Kod yaroqlilik muddati ${millisUntilFinished / 1_000} soniya"
+            }
 
+            @SuppressLint("SetTextI18n")
+            @RequiresApi(Build.VERSION_CODES.M)
+            override fun onFinish() {
+                binding.btnVerify.text = "Qayta yuborish"
+                binding.tvResendCode.text =
+                    "Kod yaroqlilik muddati yakunlandi"
+                isExpired = true
+            }
+        }
+        timer.start()
+    }
 }

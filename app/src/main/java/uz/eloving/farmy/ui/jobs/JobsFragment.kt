@@ -1,4 +1,4 @@
-package uz.eloving.farmy.ui
+package uz.eloving.farmy.ui.jobs
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

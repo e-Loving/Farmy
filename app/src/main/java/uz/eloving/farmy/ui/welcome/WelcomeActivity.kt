@@ -1,4 +1,4 @@
-package uz.eloving.farmy.welcome
+package uz.eloving.farmy.ui.welcome
 
 import android.content.Intent
 import android.os.Bundle

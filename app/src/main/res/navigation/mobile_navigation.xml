@@ -6,19 +6,19 @@
     app:startDestination="@id/navigation_shop">
     <fragment
         android:id="@+id/navigation_shop"
-        android:name="uz.eloving.farmy.ui.ShopFragment"
+        android:name="uz.eloving.farmy.ui.shop.ShopFragment"
         android:label="Home"
         tools:layout="@layout/fragment_shop" />
 
     <fragment
         android:id="@+id/navigation_garden"
-        android:name="uz.eloving.farmy.ui.GardenFragment"
+        android:name="uz.eloving.farmy.ui.garden.GardenFragment"
         android:label="Garden"
         tools:layout="@layout/fragment_garden" />
 
     <fragment
         android:id="@+id/navigation_jobs"
-        android:name="uz.eloving.farmy.ui.JobsFragment"
+        android:name="uz.eloving.farmy.ui.jobs.JobsFragment"
         android:label="Jobs"
         tools:layout="@layout/fragment_jobs" />
 </navigation>

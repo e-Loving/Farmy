@@ -1,4 +1,4 @@
-package uz.eloving.farmy.welcome
+package uz.eloving.farmy.ui.welcome
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

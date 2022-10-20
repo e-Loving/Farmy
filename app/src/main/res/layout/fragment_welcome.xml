@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".welcome.WelcomeActivity">
+    tools:context=".ui.welcome.WelcomeActivity">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
@@ -58,7 +58,7 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/teal_200"
         android:fontFamily="@font/inter"
-        android:text="Ro'yxatdan o'tish"
+        android:text="@string/royxatdan_otish"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_title"

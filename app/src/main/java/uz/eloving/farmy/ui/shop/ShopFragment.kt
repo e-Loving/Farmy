@@ -1,4 +1,4 @@
-package uz.eloving.farmy.ui
+package uz.eloving.farmy.ui.shop
 
 import android.app.Activity
 import android.content.Intent

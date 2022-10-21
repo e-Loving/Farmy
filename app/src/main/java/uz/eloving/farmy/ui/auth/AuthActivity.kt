@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import uz.eloving.farmy.databinding.ActivityAuthBinding
+import uz.eloving.farmy.ui.auth.dialog.ProgressDialog
+import uz.eloving.farmy.ui.auth.dialog.show
 import java.util.concurrent.TimeUnit
 
 class AuthActivity : AppCompatActivity() {
@@ -17,6 +20,7 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var number: String
     private var tempNumber = "+"
+    lateinit var dialogProgress: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
@@ -28,7 +32,12 @@ class AuthActivity : AppCompatActivity() {
         }
         binding.sendOTPBtn.setOnClickListener {
             sendCode()
+            dialogProgress = ProgressDialog()
+            dialogProgress.show(supportFragmentManager)
+
+
         }
+
         binding.registeredAccount.setOnClickListener {
             val intent = Intent(this, SigninActivity::class.java)
             intent.putExtra("reg", true)
@@ -69,11 +78,12 @@ class AuthActivity : AppCompatActivity() {
             } else if (e is FirebaseTooManyRequestsException) {
 
             }
+
         }
 
         override fun onCodeSent(
             verificationId: String,
-            token: PhoneAuthProvider.ForceResendingToken
+            token: PhoneAuthProvider.ForceResendingToken,
         ) {
             val intent = Intent(this@AuthActivity, CodeConfirmationActivity::class.java)
             intent.putExtra("OTP", verificationId)
@@ -105,4 +115,8 @@ class AuthActivity : AppCompatActivity() {
 
         }
     }
+
 }
+
+
+

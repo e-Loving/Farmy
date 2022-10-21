@@ -32,10 +32,18 @@ class ShopFragment : Fragment() {
     ): View {
         binding = FragmentShopBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
-        val dialog = AddFragment()
-        binding.fabAdd.setOnClickListener { dialog.show(childFragmentManager, "Sotish") }
+        binding.tvName.text = PrefManager.getUsername(requireContext())
+        binding.fabAdd.setOnClickListener { uploadInfo() }
         return binding.root
     }
+
+    private val checkPermission =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+                val data: Intent? = result.data
+                upLoadShopItemImage(data?.data)
+            }
+        }
 
     private fun upLoadShopItemImage(imageUri: Uri?) {
         storageReference = FirebaseStorage.getInstance().reference
@@ -60,12 +68,7 @@ class ShopFragment : Fragment() {
     private fun startForResult(intent: Intent, requestCode: Int) {
         if (requestCode == 1)
             intent.type = "image/*"
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-                val data: Intent? = result.data
-                upLoadShopItemImage(data?.data)
-            }
-        }.launch(intent)
+        checkPermission.launch(intent)
     }
 
 

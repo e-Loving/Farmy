@@ -30,7 +30,9 @@ class AuthActivity : AppCompatActivity() {
             sendCode()
         }
         binding.registeredAccount.setOnClickListener {
-            startActivity(Intent(this, SigninActivity::class.java))
+            val intent = Intent(this, SigninActivity::class.java)
+            intent.putExtra("reg", true)
+            startActivity(intent)
         }
     }
 

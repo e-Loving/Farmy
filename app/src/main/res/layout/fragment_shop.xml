@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="Good day"
+        android:text="Xayrli kun"
         android:textSize="16sp"
         app:layout_constraintLeft_toRightOf="@id/profile_pic"
         app:layout_constraintTop_toTopOf="@id/profile_pic" />

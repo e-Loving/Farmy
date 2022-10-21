@@ -113,7 +113,7 @@ class CodeConfirmationActivity : AppCompatActivity() {
     }
 
     private fun sendToRegister() {
-        val intent = Intent(this, RegistrationActivity::class.java)
+        val intent = Intent(this, SigninActivity::class.java)
         intent.putExtra("phoneNumber", phoneNumber)
         startActivity(intent)
     }

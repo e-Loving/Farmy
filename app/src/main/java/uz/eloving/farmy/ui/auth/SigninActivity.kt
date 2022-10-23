@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -25,64 +26,74 @@ class SigninActivity : AppCompatActivity() {
             onBackPressed()
         }
         binding.signlogin.setOnClickListener {
-            if (intent.getBooleanExtra("reg", false)) {
-                Toast.makeText(this, binding.usernamelogin.text.toString(), Toast.LENGTH_SHORT)
-                    .show()
-                auth.signInWithEmailAndPassword(
-                    "${binding.usernamelogin.text.toString()}@gmail.com",
-                    binding.passwordlogin.text.toString()
-                )
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            PrefManager.saveUsername(
-                                this,
-                                binding.usernamelogin.text.toString()
-                            )
-                            startActivity(Intent(this, MainActivity::class.java))
-                        } else {
-                            Toast.makeText(
-                                baseContext, "Bunday xisob mavjud emas",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-            } else {
-                auth.createUserWithEmailAndPassword(
-                    "${binding.usernamelogin.text.toString()}@gmail.com",
-                    binding.passwordlogin.text.toString()
-                )
-                    .addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            databaseReference = FirebaseDatabase.getInstance().getReference("users")
-                            databaseReference.child(
-                                binding.usernamelogin.text.toString()
-                            ).setValue(
-                                UserModel(
-                                    binding.usernamelogin.text.toString(),
-                                    binding.passwordlogin.text.toString(),
-                                    intent.getStringExtra("phoneNumber")!!
+            if (binding.usernamelogin.text?.length!! > 3 && binding.passwordlogin.text?.length!! > 6) {
+                if (intent.getBooleanExtra("reg", false)) {
+                    Toast.makeText(this, binding.usernamelogin.text.toString(), Toast.LENGTH_SHORT)
+                        .show()
+                    auth.signInWithEmailAndPassword(
+                        "${binding.usernamelogin.text}@gmail.com",
+                        binding.passwordlogin.text.toString()
+                    )
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                PrefManager.saveUsername(
+                                    this,
+                                    binding.usernamelogin.text.toString()
                                 )
-                            ).addOnCompleteListener {
-                                if (it.isSuccessful) {
-                                    Toast.makeText(
-                                        this,
-                                        "Muvaffaqiyatli yakunlandi",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    PrefManager.saveUsername(
-                                        this,
-                                        binding.usernamelogin.text.toString()
-                                    )
-                                } else {
-                                    Toast.makeText(this, "Muammo yuzaga keldi", Toast.LENGTH_SHORT)
-                                        .show()
-                                }
+                                startActivity(Intent(this, MainActivity::class.java))
+                            } else {
+                                Toast.makeText(
+                                    baseContext, "Bunday xisob mavjud emas",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
-                            startActivity(Intent(this, MainActivity::class.java))
-                        } else {
-                            Toast.makeText(this, "Bu nom band qilingan", Toast.LENGTH_SHORT).show()
                         }
-                    }
+                } else {
+                    auth.createUserWithEmailAndPassword(
+                        "${binding.usernamelogin.text}@gmail.com",
+                        binding.passwordlogin.text.toString()
+                    )
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                databaseReference =
+                                    FirebaseDatabase.getInstance().getReference("users")
+                                databaseReference.child(
+                                    binding.usernamelogin.text.toString()
+                                ).setValue(
+                                    UserModel(
+                                        binding.usernamelogin.text.toString(),
+                                        binding.passwordlogin.text.toString(),
+                                        intent.getStringExtra("phoneNumber")!!
+                                    )
+                                ).addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                        Toast.makeText(
+                                            this,
+                                            "Muvaffaqiyatli yakunlandi",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        PrefManager.saveUsername(
+                                            this,
+                                            binding.usernamelogin.text.toString()
+                                        )
+                                        startActivity(Intent(this, MainActivity::class.java))
+                                    } else {
+                                        Toast.makeText(
+                                            this,
+                                            "Muammo yuzaga keldi",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(this, "Bu nom band qilingan", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                }
+            } else {
+                Toast.makeText(this, "Ma'lumotlar juda qisqa", Toast.LENGTH_SHORT).show()
             }
         }
     }

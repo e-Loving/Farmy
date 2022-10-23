@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="70dp"
-        android:background="@drawable/add_image_background"
         android:padding="80dp"
         android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintLeft_toLeftOf="parent"

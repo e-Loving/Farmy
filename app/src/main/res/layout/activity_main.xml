@@ -14,7 +14,7 @@
         app:iconSize="25dp"
         app:iconTint="@color/smoothbaricon"
         app:backgroundColor="@color/smoothbar"
-        app:indicatorColor="@color/teal_700"
+        app:indicatorColor="@color/teal_200"
         app:indicatorRadius="15dp"
         app:itemFontFamily="@font/inter"
         app:layout_constraintBottom_toBottomOf="parent"

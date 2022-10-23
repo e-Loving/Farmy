@@ -11,8 +11,10 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import uz.eloving.farmy.databinding.ActivityAuthBinding
-import uz.eloving.farmy.ui.auth.dialog.ProgressDialog
-import uz.eloving.farmy.ui.auth.dialog.show
+import uz.eloving.farmy.util.ProgressDialog
+import uz.eloving.farmy.util.hide
+import uz.eloving.farmy.util.show
+
 import java.util.concurrent.TimeUnit
 
 class AuthActivity : AppCompatActivity() {
@@ -90,6 +92,7 @@ class AuthActivity : AppCompatActivity() {
             intent.putExtra("resendToken", token)
             intent.putExtra("phoneNumber", number)
             intent.putExtra("tempNumber", tempNumber)
+            dialogProgress.hide()
             startActivity(intent)
         }
     }

@@ -1,10 +1,10 @@
-package uz.eloving.farmy.ui.auth.dialog
+package uz.eloving.farmy.util
 
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import uz.eloving.farmy.R
 
-class ProgressDialog :DialogFragment(R.layout.dialog_progress){
+class ProgressDialog : DialogFragment(R.layout.dialog_progress) {
 
     override fun onStart() {
         super.onStart()

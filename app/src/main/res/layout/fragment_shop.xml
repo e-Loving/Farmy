@@ -37,16 +37,6 @@
         app:layout_constraintStart_toStartOf="@id/tv_greeting" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/hand_wave"
-        app:layout_constraintBottom_toBottomOf="@id/tv_greeting"
-        app:layout_constraintStart_toEndOf="@id/tv_greeting"
-        app:layout_constraintTop_toTopOf="@id/tv_greeting" />
-
-    <ImageView
         android:id="@+id/iv_cart"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -64,7 +54,7 @@
         android:src="@drawable/heart"
         app:layout_constraintBottom_toBottomOf="@+id/profile_pic"
         app:layout_constraintEnd_toStartOf="@id/iv_cart"
-        app:layout_constraintTop_toTopOf="@id/profile_pic" />
+        app:layout_constraintTop_toTopOf="@id/profile_pic"/>
 
     <EditText
         android:id="@+id/editText"
@@ -87,9 +77,9 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="80dp"
         android:foregroundGravity="center"
-        app:tint="@color/white"
         android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

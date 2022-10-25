@@ -11,7 +11,11 @@ import com.google.firebase.database.FirebaseDatabase
 import uz.eloving.farmy.MainActivity
 import uz.eloving.farmy.data.PrefManager
 import uz.eloving.farmy.databinding.ActivitySigninBinding
+import uz.eloving.farmy.databinding.DialogProgressBinding
 import uz.eloving.farmy.model.UserModel
+import uz.eloving.farmy.util.ProgressDialog
+import uz.eloving.farmy.util.hide
+import uz.eloving.farmy.util.show
 
 class SigninActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninBinding
@@ -22,6 +26,7 @@ class SigninActivity : AppCompatActivity() {
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
+        val dialog = ProgressDialog()
         binding.ivBackSignIn.setOnClickListener {
             onBackPressed()
         }
@@ -30,6 +35,7 @@ class SigninActivity : AppCompatActivity() {
                 if (intent.getBooleanExtra("reg", false)) {
                     Toast.makeText(this, binding.usernamelogin.text.toString(), Toast.LENGTH_SHORT)
                         .show()
+                    dialog.show(supportFragmentManager)
                     auth.signInWithEmailAndPassword(
                         "${binding.usernamelogin.text}@gmail.com",
                         binding.passwordlogin.text.toString()
@@ -41,14 +47,17 @@ class SigninActivity : AppCompatActivity() {
                                     binding.usernamelogin.text.toString()
                                 )
                                 startActivity(Intent(this, MainActivity::class.java))
+                                finish()
                             } else {
                                 Toast.makeText(
                                     baseContext, "Bunday xisob mavjud emas",
                                     Toast.LENGTH_SHORT
                                 ).show()
+                                dialog.hide()
                             }
                         }
                 } else {
+                    dialog.show(supportFragmentManager)
                     auth.createUserWithEmailAndPassword(
                         "${binding.usernamelogin.text}@gmail.com",
                         binding.passwordlogin.text.toString()
@@ -76,14 +85,16 @@ class SigninActivity : AppCompatActivity() {
                                             this,
                                             binding.usernamelogin.text.toString()
                                         )
+                                        dialog.hide()
                                         startActivity(Intent(this, MainActivity::class.java))
+                                        finish()
                                     } else {
                                         Toast.makeText(
                                             this,
                                             "Muammo yuzaga keldi",
                                             Toast.LENGTH_SHORT
-                                        )
-                                            .show()
+                                        ).show()
+                                        dialog.hide()
                                     }
                                 }
                             } else {

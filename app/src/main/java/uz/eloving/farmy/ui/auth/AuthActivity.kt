@@ -29,15 +29,12 @@ class AuthActivity : AppCompatActivity() {
         setContentView(binding.root)
         FirebaseApp.initializeApp(this)
         auth = FirebaseAuth.getInstance()
+        dialogProgress = ProgressDialog()
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }
         binding.sendOTPBtn.setOnClickListener {
             sendCode()
-            dialogProgress = ProgressDialog()
-            dialogProgress.show(supportFragmentManager)
-
-
         }
 
         binding.registeredAccount.setOnClickListener {
@@ -76,9 +73,13 @@ class AuthActivity : AppCompatActivity() {
 
         override fun onVerificationFailed(e: FirebaseException) {
             if (e is FirebaseAuthInvalidCredentialsException) {
-
+                Toast.makeText(this@AuthActivity, "Nomer noto'g'ri", Toast.LENGTH_SHORT).show()
             } else if (e is FirebaseTooManyRequestsException) {
-
+                Toast.makeText(
+                    this@AuthActivity,
+                    "Iltimos birozdan so'ng harakat qiling",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
@@ -104,21 +105,19 @@ class AuthActivity : AppCompatActivity() {
                 number.forEach { if (it in '0'..'9') tempNumber += it.toString() }
                 val options = PhoneAuthOptions.newBuilder(auth)
                     .setPhoneNumber(tempNumber)
-                    .setTimeout(60L, TimeUnit.SECONDS)
+                    .setTimeout(120L, TimeUnit.SECONDS)
                     .setActivity(this)
                     .setCallbacks(callbacks)
                     .build()
                 PhoneAuthProvider.verifyPhoneNumber(options)
-
+                dialogProgress.show(supportFragmentManager)
             } else {
-                Toast.makeText(this, "Please Enter correct Number", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Raqam noto'g'ri", Toast.LENGTH_SHORT).show()
             }
         } else {
-            Toast.makeText(this, "Please Enter Number", Toast.LENGTH_SHORT).show()
-
+            Toast.makeText(this, "Raqamingizni kiriting !", Toast.LENGTH_SHORT).show()
         }
     }
-
 }
 
 

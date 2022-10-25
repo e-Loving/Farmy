@@ -12,7 +12,6 @@ import androidx.annotation.RequiresApi
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import uz.eloving.farmy.MainActivity
 import uz.eloving.farmy.data.PrefManager
 import uz.eloving.farmy.databinding.ActivityCodeConfirmationBinding
 import java.util.concurrent.TimeUnit
@@ -49,12 +48,13 @@ class CodeConfirmationActivity : AppCompatActivity() {
                         )
                         signInWithPhoneAuthCredential(credential)
                     } else {
-                        Toast.makeText(this, "Please Enter Correct OTP", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Kod noto'g'ri !", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this, "Please Enter OTP", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Iltimos kod kiriting !", Toast.LENGTH_SHORT).show()
                 }
             } else {
+                binding.etPinView.setText("")
                 resendVerificationCode()
             }
         }
@@ -63,7 +63,7 @@ class CodeConfirmationActivity : AppCompatActivity() {
     private fun resendVerificationCode() {
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(tempNumber)
-            .setTimeout(60L, TimeUnit.SECONDS)
+            .setTimeout(120L, TimeUnit.SECONDS)
             .setActivity(this)
             .setCallbacks(callbacks)
             .setForceResendingToken(resendToken)
@@ -106,7 +106,8 @@ class CodeConfirmationActivity : AppCompatActivity() {
 
                     Log.d("TAG", "signInWithPhoneAuthCredential: ${task.exception.toString()}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-
+                        Toast.makeText(this, "Xatolik, qaytadan urining !", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
@@ -116,17 +117,18 @@ class CodeConfirmationActivity : AppCompatActivity() {
         val intent = Intent(this, SigninActivity::class.java)
         intent.putExtra("phoneNumber", phoneNumber)
         startActivity(intent)
+        finish()
     }
 
     @SuppressLint("SetTextI18n")
     private fun startTimer() {
         binding.btnVerify.text = "Tasdiqlash"
         isExpired = false
-        val timer = object : CountDownTimer(60_000, 1_000) {
+        val timer = object : CountDownTimer(120_000, 1_000) {
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 binding.tvResendCode.text =
-                    "Kod yaroqlilik muddati ${millisUntilFinished / 1_000} soniya"
+                    "Kod yaroqlilik muddati ${timeConversion(millisUntilFinished / 1_000)}"
             }
 
             @SuppressLint("SetTextI18n")
@@ -139,5 +141,14 @@ class CodeConfirmationActivity : AppCompatActivity() {
             }
         }
         timer.start()
+    }
+
+    private fun timeConversion(until: Long): String {
+        val minutesInAnHour = 60
+        val secondsInAMinute = 60
+        val seconds = until % secondsInAMinute
+        val totalMinutes = until / secondsInAMinute
+        val minutes = totalMinutes % minutesInAnHour
+        return "$minutes : $seconds"
     }
 }

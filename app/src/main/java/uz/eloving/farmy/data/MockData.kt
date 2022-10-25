@@ -7,7 +7,7 @@ class MockData {
     companion object {
         val data = arrayListOf(
             UIModule(
-                "O'simligingiz kasalligini aniqlayolmayapsizmi ? ", R.raw.save_nature,
+                "O'simligingiz kasalligini aniqlay olmayapsizmi ? ", R.raw.save_nature,
                 "Bizga o'simlik rasmini yuklang, biz esa sizga undagi kasallikni " +
                         "aniqlashga yordam beramiz !",
                 false
@@ -19,7 +19,7 @@ class MockData {
                 false
             ),
             UIModule(
-                "Ish topish yoki ishchi qidirshda muommo bormi ? ", R.raw.search_for_job,
+                "Ish yoki ishchi qidirishda muammo bormi ? ", R.raw.search_for_job,
                 "Biz orqali o'zingizga oson ish va ishchi toping. Ishchilar va ish " +
                         "beruvchilar uchun eng afzal yechim — Farmy",
                 true

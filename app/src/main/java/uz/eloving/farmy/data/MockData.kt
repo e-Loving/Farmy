@@ -1,6 +1,8 @@
 package uz.eloving.farmy.data
 
+import android.content.Context
 import uz.eloving.farmy.R
+import uz.eloving.farmy.model.JobModule
 import uz.eloving.farmy.model.UIModule
 
 class MockData {
@@ -25,5 +27,27 @@ class MockData {
                 true
             )
         )
+
+
+        fun getConstants(context: Context): ArrayList<JobModule> {
+            val jobs = ArrayList<JobModule>()
+            jobs.add(JobModule(1,"All"))
+            jobs.add(JobModule(2,"Dehqon"))
+            jobs.add(JobModule(4,"Bogbon"))
+            jobs.add(JobModule(5,"Bogbon"))
+            jobs.add(JobModule(6,"Bogbon"))
+            jobs.add(JobModule(7,"Bogbon"))
+            jobs.add(JobModule(8,"Bogbon"))
+
+            return jobs
+        }
+
+//        fun getInfoEmployees(context: Context){
+//            val info=ArrayList<>
+//        }
+
+
     }
+
+
 }

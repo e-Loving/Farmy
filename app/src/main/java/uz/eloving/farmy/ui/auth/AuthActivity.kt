@@ -73,7 +73,7 @@ class AuthActivity : AppCompatActivity() {
 
         override fun onVerificationFailed(e: FirebaseException) {
             if (e is FirebaseAuthInvalidCredentialsException) {
-                Toast.makeText(this@AuthActivity, "Nomer noto'g'ri", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AuthActivity, "Raqam noto'g'ri", Toast.LENGTH_SHORT).show()
             } else if (e is FirebaseTooManyRequestsException) {
                 Toast.makeText(
                     this@AuthActivity,

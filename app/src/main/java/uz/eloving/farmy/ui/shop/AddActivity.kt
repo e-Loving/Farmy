@@ -51,10 +51,10 @@ class AddActivity : AppCompatActivity() {
         )
             .setValue(
                 ShopItemModel(
-                    binding.name.text.toString(),
-                    binding.price.text.toString().toFloat(),
-                    binding.desc.text.toString(),
-                    binding.amount.text.toString().toFloat()
+                    binding.productName.text.toString(),
+                    binding.productPrice.text.toString().toFloat(),
+                    binding.productDesc.text.toString(),
+                    binding.productAmount.text.toString().toFloat()
                 )
             )
             .addOnCompleteListener {

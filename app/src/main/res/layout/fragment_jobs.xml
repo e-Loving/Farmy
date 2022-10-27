@@ -1,48 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.jobs.JobsFragment">
 
-
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_search"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/background_search"
-        android:drawableStart="@drawable/search"
-        android:drawablePadding="10dp"
-        android:hint="Qidiring..."
-        android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_jobName"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        tools:listitem="@layout/item_job"
-        app:layout_constraintTop_toBottomOf="@id/et_search"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="15dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tv_employees"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rv_jobName"
-        android:layout_marginTop="10dp"
-        tools:listitem="@layout/item_employees"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/background_search"
+            android:drawableStart="@drawable/search"
+            android:drawablePadding="10dp"
+            android:hint="Qidiring..."
+            android:paddingStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_jobName"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_search"
+            tools:listitem="@layout/item_job" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tv_employees"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_jobName"
+            tools:listitem="@layout/item_employees" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -27,20 +27,22 @@ class MockData {
                 true
             )
         )
+        val categoryData =
+            arrayListOf("Mevalar", "Sabzavotlar", "Poliz-ekinlari", "Sut mahsulotlari")
 
-
-        fun getConstants(context: Context): ArrayList<JobModule> {
+        fun getConstants(): ArrayList<JobModule> {
             val jobs = ArrayList<JobModule>()
-            jobs.add(JobModule(1,"All"))
-            jobs.add(JobModule(2,"Dehqon"))
-            jobs.add(JobModule(4,"Bogbon"))
-            jobs.add(JobModule(5,"Bogbon"))
-            jobs.add(JobModule(6,"Bogbon"))
-            jobs.add(JobModule(7,"Bogbon"))
-            jobs.add(JobModule(8,"Bogbon"))
+            jobs.add(JobModule(1, "All"))
+            jobs.add(JobModule(2, "Dehqon"))
+            jobs.add(JobModule(4, "Bogbon"))
+            jobs.add(JobModule(5, "Bogbon"))
+            jobs.add(JobModule(6, "Bogbon"))
+            jobs.add(JobModule(7, "Bogbon"))
+            jobs.add(JobModule(8, "Bogbon"))
 
             return jobs
         }
+
 
 //        fun getInfoEmployees(context: Context){
 //            val info=ArrayList<>

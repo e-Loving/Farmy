@@ -1,14 +1,11 @@
-package uz.eloving.farmy.ui.garden
+package uz.eloving.farmy.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import uz.eloving.farmy.databinding.ItemGardenBinding
 
-import uz.eloving.farmy.db.GardenDatabase
 import uz.eloving.farmy.model.GardenItemModel
 
 class AdapterGarden() : RecyclerView.Adapter<AdapterGarden.ViewHolder>() {

@@ -3,11 +3,11 @@ package uz.eloving.farmy.ui.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import uz.eloving.farmy.MainActivity
 import uz.eloving.farmy.data.PrefManager
 import uz.eloving.farmy.databinding.ActivitySigninBinding
@@ -33,8 +33,6 @@ class SigninActivity : AppCompatActivity() {
         binding.signlogin.setOnClickListener {
             if (binding.usernamelogin.text?.length!! > 3 && binding.passwordlogin.text?.length!! > 6) {
                 if (intent.getBooleanExtra("reg", false)) {
-                    Toast.makeText(this, binding.usernamelogin.text.toString(), Toast.LENGTH_SHORT)
-                        .show()
                     dialog.show(supportFragmentManager)
                     auth.signInWithEmailAndPassword(
                         "${binding.usernamelogin.text}@gmail.com",
@@ -86,7 +84,7 @@ class SigninActivity : AppCompatActivity() {
                                             binding.usernamelogin.text.toString()
                                         )
                                         dialog.hide()
-                                        startActivity(Intent(this, MainActivity::class.java))
+                                        startActivity(Intent(baseContext, MainActivity::class.java))
                                         finish()
                                     } else {
                                         Toast.makeText(

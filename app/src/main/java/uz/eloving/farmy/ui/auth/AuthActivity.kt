@@ -53,11 +53,9 @@ class AuthActivity : AppCompatActivity() {
                 } else {
                     Log.d("TAG", "signInWithPhoneAuthCredential: ${task.exception.toString()}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-
+                        Toast.makeText(this, "Xatolik !", Toast.LENGTH_SHORT).show()
                     }
-
                 }
-
             }
     }
 

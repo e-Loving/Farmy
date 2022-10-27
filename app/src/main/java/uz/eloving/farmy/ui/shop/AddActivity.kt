@@ -29,7 +29,7 @@ class AddActivity : AppCompatActivity() {
             intent.type = "image/*"
             resultLauncher.launch(intent)
         }
-        binding.publish.setOnClickListener { uploadInfo() }
+        binding.publish.setOnClickListener { upLoadShopItemImage(uri) }
     }
 
     private var resultLauncher =
@@ -42,8 +42,8 @@ class AddActivity : AppCompatActivity() {
             }
         }
 
-    private fun uploadInfo() {
-        databaseReference = FirebaseDatabase.getInstance().getReference("discount")
+    private fun uploadInfo(imgDownloadUrl: String) {
+        databaseReference = FirebaseDatabase.getInstance().getReference("sell")
         databaseReference.child(
             PrefManager.getUsername(this).toString() + PrefManager.getShopItemCount(
                 this
@@ -54,13 +54,14 @@ class AddActivity : AppCompatActivity() {
                     binding.name.text.toString(),
                     binding.price.text.toString().toFloat(),
                     binding.desc.text.toString(),
-                    binding.amount.text.toString().toFloat()
+                    binding.amount.text.toString().toFloat(),
+                    imgDownloadUrl,
+                    binding.type.text.toString()
                 )
             )
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     PrefManager.setShopItemCount(this)
-                    upLoadShopItemImage(uri)
                 } else {
                     Toast.makeText(this, "Failed with info", Toast.LENGTH_SHORT).show()
                 }
@@ -68,13 +69,13 @@ class AddActivity : AppCompatActivity() {
     }
 
     private fun upLoadShopItemImage(imageUri: Uri?) {
-        storageReference = FirebaseStorage.getInstance().reference
+        storageReference = FirebaseStorage.getInstance().reference.child("users")
         imageUri?.let { image ->
-            storageReference.child(
-                "users/${PrefManager.getUsername(this)}${
-                    PrefManager.getShopItemCount(this)
-                }"
-            ).putFile(image)
+            val imagePath = "${PrefManager.getUsername(this)}${
+                PrefManager.getShopItemCount(this)
+            }.png"
+            val storagePath = storageReference.child(imagePath)
+            storagePath.putFile(image)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
@@ -82,6 +83,10 @@ class AddActivity : AppCompatActivity() {
                         Toast.makeText(this, "Fail", Toast.LENGTH_SHORT).show()
                     }
                 }
+            storageReference.child(imagePath).downloadUrl.addOnSuccessListener {
+                uploadInfo(it.toString())
+                Toast.makeText(this, "$it", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

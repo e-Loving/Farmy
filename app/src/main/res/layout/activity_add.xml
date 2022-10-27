@@ -40,14 +40,13 @@
         android:hint="price"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
-    <androidx.appcompat.widget.SwitchCompat
+    <CheckBox
         android:id="@+id/sw_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amount" />
+        app:layout_constraintTop_toBottomOf="@+id/type" />
 
     <EditText
         android:id="@+id/amount"
@@ -55,6 +54,14 @@
         android:layout_height="wrap_content"
         android:hint="amount"
         app:layout_constraintTop_toBottomOf="@+id/desc" />
+
+    <EditText
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="type"
+        app:layout_constraintTop_toBottomOf="@+id/amount"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/publish"

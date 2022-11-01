@@ -12,21 +12,14 @@ import uz.eloving.farmy.model.ShopItemModel
 
 class AdapterCategory(private val ctx: Context) :
     RecyclerView.Adapter<AdapterCategory.ViewHolder>() {
-    private var adapterItemSubcategory = AdapterSubcategory(ctx)
     private var list = hashMapOf<String, ArrayList<ShopItemModel>>()
 
     inner class ViewHolder(private val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: String, data: ArrayList<ShopItemModel>) {
-            binding.category.text = category
-            binding.rvCategory.adapter = adapterItemSubcategory
-            binding.rvCategory.layoutManager =
-                LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
-            if (data.size > 0)
-                adapterItemSubcategory.updateList(data)
+
+
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -3,6 +3,7 @@ package uz.eloving.farmy.data
 import android.content.Context
 import uz.eloving.farmy.R
 import uz.eloving.farmy.model.JobModule
+import uz.eloving.farmy.model.TypeModule
 import uz.eloving.farmy.model.UIModule
 
 class MockData {
@@ -28,7 +29,7 @@ class MockData {
             )
         )
         val categoryData =
-            arrayListOf("Mevalar", "Sabzavotlar", "Poliz-ekinlari", "Sut mahsulotlari")
+            arrayListOf("Mevalar", "Sab  zavotlar", "Poliz-ekinlari", "Sut mahsulotlari")
 
         fun getConstants(): ArrayList<JobModule> {
             val jobs = ArrayList<JobModule>()
@@ -39,15 +40,19 @@ class MockData {
             jobs.add(JobModule(6, "Bogbon"))
             jobs.add(JobModule(7, "Bogbon"))
             jobs.add(JobModule(8, "Bogbon"))
-
             return jobs
         }
 
 
-//        fun getInfoEmployees(context: Context){
+        //        fun getInfoEmployees(context: Context){
 //            val info=ArrayList<>
 //        }
-
+        val cardData = arrayListOf(
+            TypeModule(
+                R.drawable.fruit, "Mevalar"),
+            TypeModule(
+                R.drawable.vegas, "Sabzavotlar")
+        )
 
     }
 

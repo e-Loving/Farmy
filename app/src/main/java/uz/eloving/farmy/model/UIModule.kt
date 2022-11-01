@@ -21,3 +21,7 @@ data class InfoModule(
     val like:Int,
     val date:Int
 )
+data class TypeModule(
+    val image:Int,
+    val name:String
+)

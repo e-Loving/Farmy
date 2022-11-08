@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="smoothbar">#FFFFFF</color>
     <color name="smoothbaricon">#000000</color>
+    <color name="smoothbar">#FFFFFF</color>
+    <color name="textDay">#FF000000</color>
+    <color name="adapterItem">#e5e5e5</color>
 </resources>

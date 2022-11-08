@@ -19,4 +19,7 @@ interface GardenDao {
 
     @Query("Delete from GardenItemModel")
     fun deleteAll()
+
+    @Query("Select * from GardenItemModel where disease like :str ")
+    fun getSearchedItems(str: String): LiveData<List<GardenItemModel>>
 }

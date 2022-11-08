@@ -17,7 +17,14 @@
         android:theme="@style/Theme.PlantDiseaseDetection"
         tools:targetApi="31">
         <activity
-            android:name=".ItemShopActivity"
+            android:name=".ItemsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.shop.ItemShopActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -60,7 +67,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

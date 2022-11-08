@@ -1,24 +1,26 @@
 package uz.eloving.farmy.adapter
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import uz.eloving.farmy.data.MockData
 import uz.eloving.farmy.databinding.ItemCategoryBinding
-import uz.eloving.farmy.model.ShopItemModel
+import uz.eloving.farmy.model.CategoryModel
 
-class AdapterCategory(private val ctx: Context) :
+class AdapterCategory :
     RecyclerView.Adapter<AdapterCategory.ViewHolder>() {
-    private var list = hashMapOf<String, ArrayList<ShopItemModel>>()
+    private var list = MockData.categoryData
+    var onItemCLick: ((CategoryModel) -> Unit)? = null
 
     inner class ViewHolder(private val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: String, data: ArrayList<ShopItemModel>) {
+        fun bind(data: CategoryModel) {
+            binding.ivCategory.setImageResource(data.img)
+            binding.categoryName.text = data.title
+        }
 
-
+        init {
+            onItemCLick?.invoke(list[adapterPosition])
         }
     }
 
@@ -28,19 +30,11 @@ class AdapterCategory(private val ctx: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        list[MockData.categoryData[position]]?.let {
-            holder.bind(MockData.categoryData[position], it)
-        }
+        holder.bind(list[position])
     }
 
 
     override fun getItemCount(): Int {
         return list.size
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(data: HashMap<String, ArrayList<ShopItemModel>>) {
-        this.list = data
-        notifyDataSetChanged()
     }
 }

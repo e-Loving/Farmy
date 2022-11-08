@@ -1,27 +1,25 @@
 package uz.eloving.farmy.data
 
-import android.content.Context
 import uz.eloving.farmy.R
-import uz.eloving.farmy.model.JobModule
-import uz.eloving.farmy.model.TypeModule
-import uz.eloving.farmy.model.UIModule
+import uz.eloving.farmy.model.CategoryModel
+import uz.eloving.farmy.model.UIModel
 
 class MockData {
     companion object {
         val data = arrayListOf(
-            UIModule(
+            UIModel(
                 "O'simligingiz kasalligini aniqlay olmayapsizmi ? ", R.raw.save_nature,
                 "Bizga o'simlik rasmini yuklang, biz esa sizga undagi kasallikni " +
                         "aniqlashga yordam beramiz !",
                 false
             ),
-            UIModule(
+            UIModel(
                 "Sotish va sotib olishda shaffoflik qidiryapsizmi ?", R.raw.sell_and_buy,
                 "Biz sizga mevalardan tortib poliz ekinlarigacha oson sotish va sotib " +
                         "olishni taklif qilamiz !",
                 false
             ),
-            UIModule(
+            UIModel(
                 "Ish yoki ishchi qidirishda muammo bormi ? ", R.raw.search_for_job,
                 "Biz orqali o'zingizga oson ish va ishchi toping. Ishchilar va ish " +
                         "beruvchilar uchun eng afzal yechim — Farmy",
@@ -29,32 +27,11 @@ class MockData {
             )
         )
         val categoryData =
-            arrayListOf("Mevalar", "Sab  zavotlar", "Poliz-ekinlari", "Sut mahsulotlari")
-
-        fun getConstants(): ArrayList<JobModule> {
-            val jobs = ArrayList<JobModule>()
-            jobs.add(JobModule(1, "All"))
-            jobs.add(JobModule(2, "Dehqon"))
-            jobs.add(JobModule(4, "Bogbon"))
-            jobs.add(JobModule(5, "Bogbon"))
-            jobs.add(JobModule(6, "Bogbon"))
-            jobs.add(JobModule(7, "Bogbon"))
-            jobs.add(JobModule(8, "Bogbon"))
-            return jobs
-        }
-
-
-        //        fun getInfoEmployees(context: Context){
-//            val info=ArrayList<>
-//        }
-        val cardData = arrayListOf(
-            TypeModule(
-                R.drawable.fruit, "Mevalar"),
-            TypeModule(
-                R.drawable.vegas, "Sabzavotlar")
-        )
-
+            arrayListOf(
+                CategoryModel("Mevalar", R.drawable.mevalar, "mevalar"),
+                CategoryModel("Sabzavotlar", R.drawable.sabzavotlar, "sabzavotlar"),
+                CategoryModel("Poliz-ekinlari", R.drawable.poliz_ekinlari, "poliz-ekinlari"),
+                CategoryModel("Sut mahsulotlari", R.drawable.sut_mahsulotlari, "sut mahsulotlari")
+            )
     }
-
-
 }

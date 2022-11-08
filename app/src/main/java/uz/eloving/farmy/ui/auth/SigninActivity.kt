@@ -59,50 +59,51 @@ class SigninActivity : AppCompatActivity() {
                     auth.createUserWithEmailAndPassword(
                         "${binding.usernamelogin.text}@gmail.com",
                         binding.passwordlogin.text.toString()
-                    )
-                        .addOnCompleteListener(this) { task ->
-                            if (task.isSuccessful) {
-                                databaseReference =
-                                    FirebaseDatabase.getInstance().getReference("users")
-                                databaseReference.child(
-                                    binding.usernamelogin.text.toString()
-                                ).setValue(
-                                    UserModel(
-                                        binding.usernamelogin.text.toString(),
-                                        binding.passwordlogin.text.toString(),
-                                        intent.getStringExtra("phoneNumber")!!
+                    ).addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            databaseReference =
+                                FirebaseDatabase.getInstance().getReference("users")
+                            databaseReference.child(
+                                binding.usernamelogin.text.toString()
+                            ).setValue(
+                                UserModel(
+                                    binding.usernamelogin.text.toString(),
+                                    binding.passwordlogin.text.toString(),
+                                    intent.getStringExtra("phoneNumber")!!
+                                )
+                            ).addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    Toast.makeText(
+                                        this,
+                                        "Muvaffaqiyatli yakunlandi",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    PrefManager.saveUsername(
+                                        this,
+                                        binding.usernamelogin.text.toString()
                                     )
-                                ).addOnCompleteListener {
-                                    if (it.isSuccessful) {
-                                        Toast.makeText(
-                                            this,
-                                            "Muvaffaqiyatli yakunlandi",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        PrefManager.saveUsername(
-                                            this,
-                                            binding.usernamelogin.text.toString()
-                                        )
-                                        dialog.hide()
-                                        startActivity(Intent(baseContext, MainActivity::class.java))
-                                        finish()
-                                    } else {
-                                        Toast.makeText(
-                                            this,
-                                            "Muammo yuzaga keldi",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        dialog.hide()
-                                    }
+                                    dialog.hide()
+                                    startActivity(Intent(baseContext, MainActivity::class.java))
+                                    finish()
+                                } else {
+                                    Toast.makeText(
+                                        this,
+                                        "Muammo yuzaga keldi",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    dialog.hide()
                                 }
-                            } else {
-                                Toast.makeText(this, "Bu nom band qilingan", Toast.LENGTH_SHORT)
-                                    .show()
                             }
+                        } else {
+                            Toast.makeText(this, "Bu nom band qilingan", Toast.LENGTH_SHORT)
+                                .show()
+                            dialog.hide()
                         }
+                    }
                 }
             } else {
                 Toast.makeText(this, "Ma'lumotlar juda qisqa", Toast.LENGTH_SHORT).show()
+                dialog.hide()
             }
         }
     }

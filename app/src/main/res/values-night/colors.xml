@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="smoothbar">#000000</color>
     <color name="smoothbaricon">#FFFFFF</color>
+    <color name="textDay">#FFFFFF</color>
+    <color name="adapterItem">#2E2E2E</color>
+    <color name="smoothbar">#000000</color>
 </resources>

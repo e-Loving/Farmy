@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:text="Xayrli kun"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="75dp" />
@@ -24,8 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Islom, Sheraliyev"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textColor="@color/textDay"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/tv_greeting"
         app:layout_constraintTop_toBottomOf="@+id/tv_greeting" />
@@ -34,10 +34,12 @@
         android:id="@+id/iv_cart"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="30dp"
         android:src="@drawable/cart"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_liked"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_greeting" />
+        app:layout_constraintTop_toTopOf="@+id/iv_liked"
+        app:tint="@color/textDay"/>
 
     <ImageView
         android:id="@+id/iv_liked"
@@ -45,17 +47,22 @@
         android:layout_height="30dp"
         android:layout_marginEnd="30dp"
         android:src="@drawable/heart"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
         app:layout_constraintEnd_toStartOf="@id/iv_cart"
-        app:layout_constraintTop_toTopOf="@+id/tv_greeting" />
+        app:layout_constraintTop_toTopOf="@+id/tv_name"
+        app:tint="@color/textDay" />
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
+        android:maxLines="1"
         android:background="@drawable/background_search"
         android:drawableStart="@drawable/search"
         android:drawablePadding="10dp"
+        android:paddingStart="10dp"
+        android:imeOptions="actionSearch"
         android:hint="Qidiring..."
         android:inputType="text"
         android:textSize="15sp"
@@ -80,8 +87,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
+        android:paddingHorizontal="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editText"

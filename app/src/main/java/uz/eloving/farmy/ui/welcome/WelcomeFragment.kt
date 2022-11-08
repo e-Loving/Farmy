@@ -6,12 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import uz.eloving.farmy.ui.auth.AuthActivity
-import uz.eloving.farmy.model.UIModule
+import uz.eloving.farmy.model.UIModel
 import uz.eloving.farmy.databinding.FragmentWelcomeBinding
 
-class WelcomeFragment(private val all: UIModule) : Fragment() {
+class WelcomeFragment(private val all: UIModel) : Fragment() {
     private lateinit var binding: FragmentWelcomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -4,21 +4,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.eloving.farmy.databinding.ItemJobBinding
-import uz.eloving.farmy.model.JobModule
+import uz.eloving.farmy.model.JobModel
 
 class AdapterJob() : RecyclerView.Adapter<AdapterJob.ViewHolder>() {
 
 
-    private var list = listOf<JobModule>()
+    private var list = listOf<JobModel>()
 
     inner class ViewHolder(private val binding: ItemJobBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: JobModule) {
+        fun bind(data: JobModel) {
             binding.tvJobs.text = data.jobType.toString()
         }
     }
 
-    fun updateList(list: List<JobModule>) {
+    fun updateList(list: List<JobModel>) {
         this.list = list
         notifyDataSetChanged()
     }

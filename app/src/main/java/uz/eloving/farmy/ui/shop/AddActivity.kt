@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.database.DatabaseReference
@@ -30,6 +31,7 @@ class AddActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
         }
         binding.publish.setOnClickListener { uploadInfo() }
+        binding.ivBackAdd.setOnClickListener { onBackPressed(); finish() }
     }
 
     private var resultLauncher =
@@ -37,8 +39,9 @@ class AddActivity : AppCompatActivity() {
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
                 val res = data!!.data
-                binding.imageView.setImageURI(res)
+                binding.lottieView.visibility = View.GONE
                 uri = res
+                binding.image.setImageURI(uri)
             }
         }
 
@@ -51,10 +54,6 @@ class AddActivity : AppCompatActivity() {
         )
             .setValue(
                 ShopItemModel(
-                    binding.productName.text.toString(),
-                    binding.productPrice.text.toString().toFloat(),
-                    binding.productDesc.text.toString(),
-                    binding.productAmount.text.toString().toFloat()
                 )
             )
             .addOnCompleteListener {

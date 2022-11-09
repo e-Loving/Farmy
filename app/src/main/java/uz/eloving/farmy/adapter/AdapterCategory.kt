@@ -20,7 +20,9 @@ class AdapterCategory :
         }
 
         init {
-            onItemCLick?.invoke(list[adapterPosition])
+            itemView.setOnClickListener {
+                onItemCLick?.invoke(list[adapterPosition])
+            }
         }
     }
 

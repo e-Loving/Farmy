@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.eloving.farmy.databinding.ItemGardenBinding
-
 import uz.eloving.farmy.model.GardenItemModel
 
-class AdapterGarden() : RecyclerView.Adapter<AdapterGarden.ViewHolder>() {
+class AdapterGarden : RecyclerView.Adapter<AdapterGarden.ViewHolder>() {
 
     private var list = arrayListOf<GardenItemModel>()
     var onItemCLick: ((GardenItemModel) -> Unit)? = null

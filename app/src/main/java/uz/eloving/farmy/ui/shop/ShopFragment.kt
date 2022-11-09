@@ -21,7 +21,6 @@ class ShopFragment : Fragment() {
     private lateinit var adapter: AdapterCategory
 
     //    private lateinit var databaseReference: DatabaseReference
-    private var allData = hashMapOf<String, ArrayList<ShopItemModel>>()
     val data = arrayListOf<ArrayList<ShopItemModel>>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +34,9 @@ class ShopFragment : Fragment() {
         binding.rvCategory.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+        adapter.onItemCLick = {
+            startActivity(Intent(requireContext(), ItemsActivity::class.java))
+        }
         binding.fabAdd.setOnClickListener {
             startActivity(Intent(requireContext(), AddActivity::class.java))
         }

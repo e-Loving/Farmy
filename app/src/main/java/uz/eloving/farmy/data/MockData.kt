@@ -28,10 +28,10 @@ class MockData {
         )
         val categoryData =
             arrayListOf(
-                CategoryModel("Mevalar", R.drawable.mevalar, "mevalar"),
-                CategoryModel("Sabzavotlar", R.drawable.sabzavotlar, "sabzavotlar"),
-                CategoryModel("Poliz-ekinlari", R.drawable.poliz_ekinlari, "poliz-ekinlari"),
-                CategoryModel("Sut mahsulotlari", R.drawable.sut_mahsulotlari, "sut mahsulotlari")
+                CategoryModel("Mevalar", R.drawable.mevalar, "mevalar", 1),
+                CategoryModel("Sabzavotlar", R.drawable.sabzavotlar, "sabzavotlar", 2),
+                CategoryModel("Poliz-ekinlari", R.drawable.poliz_ekinlari, "poliz-ekinlari", 3),
+                CategoryModel("Sut mahsulotlari", R.drawable.sut_mahsulotlari, "sut mahsulotlari", 4)
             )
     }
 }

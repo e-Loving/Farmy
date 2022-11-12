@@ -3,15 +3,12 @@ package uz.eloving.farmy.ui.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import uz.eloving.farmy.MainActivity
 import uz.eloving.farmy.data.PrefManager
 import uz.eloving.farmy.databinding.ActivitySigninBinding
-import uz.eloving.farmy.databinding.DialogProgressBinding
 import uz.eloving.farmy.model.UserModel
 import uz.eloving.farmy.util.ProgressDialog
 import uz.eloving.farmy.util.hide
@@ -31,7 +28,7 @@ class SigninActivity : AppCompatActivity() {
             onBackPressed()
         }
         binding.signlogin.setOnClickListener {
-            if (binding.usernamelogin.text?.length!! > 3 && binding.passwordlogin.text?.length!! > 6) {
+            if (binding.usernamelogin.text?.length!! > 3 && binding.passwordlogin.text?.length!! >= 6) {
                 if (intent.getBooleanExtra("reg", false)) {
                     dialog.show(supportFragmentManager)
                     auth.signInWithEmailAndPassword(
@@ -47,10 +44,7 @@ class SigninActivity : AppCompatActivity() {
                                 startActivity(Intent(this, MainActivity::class.java))
                                 finish()
                             } else {
-                                Toast.makeText(
-                                    baseContext, "Bunday xisob mavjud emas",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                "Bunday xisob mavjud emas".asToast()
                                 dialog.hide()
                             }
                         }
@@ -73,11 +67,7 @@ class SigninActivity : AppCompatActivity() {
                                 )
                             ).addOnCompleteListener {
                                 if (it.isSuccessful) {
-                                    Toast.makeText(
-                                        this,
-                                        "Muvaffaqiyatli yakunlandi",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    "Muvaffaqiyatli yakunlandi".asToast()
                                     PrefManager.saveUsername(
                                         this,
                                         binding.usernamelogin.text.toString()
@@ -86,25 +76,24 @@ class SigninActivity : AppCompatActivity() {
                                     startActivity(Intent(baseContext, MainActivity::class.java))
                                     finish()
                                 } else {
-                                    Toast.makeText(
-                                        this,
-                                        "Muammo yuzaga keldi",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    "Muammo yuzaga keldi".asToast()
                                     dialog.hide()
                                 }
                             }
                         } else {
-                            Toast.makeText(this, "Bu nom band qilingan", Toast.LENGTH_SHORT)
-                                .show()
+                            "Bu nom band qilingan".asToast()
                             dialog.hide()
                         }
                     }
                 }
             } else {
-                Toast.makeText(this, "Ma'lumotlar juda qisqa", Toast.LENGTH_SHORT).show()
+                "Ma'lumotlar juda qisqa".asToast()
                 dialog.hide()
             }
         }
+    }
+
+    private fun String.asToast() {
+        Toast.makeText(baseContext, this, Toast.LENGTH_SHORT).show()
     }
 }

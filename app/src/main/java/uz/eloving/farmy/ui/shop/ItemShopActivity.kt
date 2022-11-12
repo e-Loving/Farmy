@@ -9,7 +9,7 @@ class ItemShopActivity : AppCompatActivity() {
     private lateinit var binding: ActivityItemShopBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityItemShopBinding.inflate(layoutInflater)
+        binding = ActivityItemShopBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
     }

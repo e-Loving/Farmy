@@ -33,7 +33,7 @@
         app:lottie_rawRes="@raw/hello" />
 
     <com.vicmikhailau.maskededittext.MaskedEditText
-        android:id="@+id/et_phoneNumber"
+        android:id="@+id/etPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"

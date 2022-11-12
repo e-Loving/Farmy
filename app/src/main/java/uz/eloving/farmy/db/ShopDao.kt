@@ -21,4 +21,10 @@ interface ShopDao {
     @Query("Delete from ShopItemModel")
     fun deleteAll()
 
+    @Query("Select * from ShopItemModel where type=:category")
+    fun getByCategory(category: String): LiveData<List<ShopItemModel>>
+
+    @Query("Delete from ShopItemModel where type=:category")
+    fun updateCategory(category: String)
+
 }

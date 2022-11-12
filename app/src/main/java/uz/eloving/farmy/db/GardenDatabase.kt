@@ -27,7 +27,7 @@ abstract class GardenDatabase : RoomDatabase() {
                     context.applicationContext,
                     GardenDatabase::class.java,
                     "garden.db"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }

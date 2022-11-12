@@ -7,10 +7,9 @@ import androidx.room.PrimaryKey
 data class ShopItemModel(
     val name: String? = null,
     val price: Float? = null,
-    val desc: String? = null,
-    val amount: Float? = null,
-    val imageDonwloadUrl: String? = null,
+    val imageDownloadUrl: String? = null,
     val type: String? = null,
+    val per: String,
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 )

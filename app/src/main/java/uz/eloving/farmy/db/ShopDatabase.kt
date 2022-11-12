@@ -9,7 +9,7 @@ import uz.eloving.farmy.model.GardenItemModel
 import uz.eloving.farmy.model.ShopItemModel
 import uz.eloving.farmy.util.Convertor
 
-@Database(entities = [ShopItemModel::class], version = 1, exportSchema = false)
+@Database(entities = [ShopItemModel::class], version = 2, exportSchema = false)
 @TypeConverters(Convertor::class)
 abstract class ShopDatabase : RoomDatabase() {
     abstract fun shopDao(): ShopDao
@@ -28,7 +28,7 @@ abstract class ShopDatabase : RoomDatabase() {
                     context.applicationContext,
                     ShopDatabase::class.java,
                     "shop.db"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }

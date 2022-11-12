@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import uz.eloving.farmy.adapter.AdapterCategory
-import uz.eloving.farmy.data.MockData
 import uz.eloving.farmy.data.PrefManager
 import uz.eloving.farmy.databinding.FragmentShopBinding
 import uz.eloving.farmy.model.ShopItemModel
@@ -20,7 +19,6 @@ class ShopFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var adapter: AdapterCategory
 
-    //    private lateinit var databaseReference: DatabaseReference
     val data = arrayListOf<ArrayList<ShopItemModel>>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +33,9 @@ class ShopFragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         adapter.onItemCLick = {
-            startActivity(Intent(requireContext(), ItemsActivity::class.java))
+            val intent = Intent(requireContext(), ItemsActivity::class.java)
+            intent.putExtra("category", it.title)
+            startActivity(intent)
         }
         binding.fabAdd.setOnClickListener {
             startActivity(Intent(requireContext(), AddActivity::class.java))
@@ -46,31 +46,4 @@ class ShopFragment : Fragment() {
         return binding.root
 
     }
-
-//    private fun fetchData() {
-//        for (type in MockData.categoryData) {
-//            databaseReference = FirebaseDatabase.getInstance().getReference("sell/$type")
-//            val postListener = object : ValueEventListener {
-//
-//                override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                    for (item in dataSnapshot.children) {
-//                        item.getValue(ShopItemModel::class.java)?.let {
-//
-//                        }
-//                    }
-//
-//                }
-//
-//                override fun onCancelled(databaseError: DatabaseError) {
-//                    Toast.makeText(requireContext(), "Iltimos qayta urining !", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//            }
-//            databaseReference.addValueEventListener(postListener)
-//        }
-//
-////        binding.swipe.isRefreshing = false
-//    }
-
-
 }

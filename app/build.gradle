@@ -102,8 +102,11 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     // Refresh Layout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    // Glide
     implementation 'com.github.bumptech.glide:glide:4.14.2'
+    // Glide compiler
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
-
+    // LifeCycleOwner
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
 
 }

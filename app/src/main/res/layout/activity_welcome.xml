@@ -6,27 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.welcome.WelcomeActivity">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
-        android:id="@+id/dots"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        app:dotsColor="@color/teal_200"
-        app:dotsCornerRadius="20dp"
-        app:dotsSize="20dp"
-        app:dotsSpacing="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/welcome_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

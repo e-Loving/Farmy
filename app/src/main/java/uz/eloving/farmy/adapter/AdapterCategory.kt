@@ -1,5 +1,6 @@
 package uz.eloving.farmy.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -38,5 +39,11 @@ class AdapterCategory :
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list: ArrayList<CategoryModel>) {
+        this.list = list
+        notifyDataSetChanged()
     }
 }

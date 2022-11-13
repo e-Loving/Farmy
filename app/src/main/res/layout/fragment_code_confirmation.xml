@@ -1,52 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.auth.CodeConfirmationActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.welcome.auth.CodeConfirmationFragment">
 
     <TextView
         android:id="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter"
         android:text="@string/tasdiqlash"
         android:textColor="@color/teal_200"
         android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_back" />
+        android:textStyle="bold" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView3"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/code_confirmation" />
+        app:lottie_rawRes="@raw/code_confirmation"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp" />
 
     <ImageView
         android:id="@+id/iv_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/teal_200"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/back_to_previous_page"
-        android:src="@drawable/ic_back"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/teal_200" />
+        android:src="@drawable/ic_back" />
 
 
     <TextView
         android:id="@+id/phoneNumber"
+        app:layout_constraintBottom_toTopOf="@+id/tv_resendCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -55,14 +58,18 @@
         android:gravity="center"
         android:text="@string/telefon_raqamingiz"
         android:textColor="@color/teal_200"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_resendCode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="18sp" />
 
     <com.chaos.view.PinView
         android:id="@+id/et_pinView"
         style="@style/PinWidget.PinView"
+        app:itemCount="6"
+        app:itemRadius="10dp"
+        app:itemSpacing="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/phoneNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lineColor="@color/teal_200"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
@@ -73,41 +80,34 @@
         android:imeOptions="actionDone"
         android:inputType="number"
         android:maxLength="6"
-        android:textSize="17sp"
-        app:itemCount="6"
-        app:itemRadius="10dp"
-        app:itemSpacing="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/phoneNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:lineColor="@color/teal_200" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/tv_resendCode"
+        app:layout_constraintBottom_toTopOf="@+id/btn_verify"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="@string/kod_yaroqlilik_muddati"
         android:textColor="@color/teal_200"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_verify"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:textSize="18sp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_verify"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="@color/teal_200"
-        android:text="@string/tasdiqlash"
-        android:textSize="18sp"
         app:cornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/phoneNumber"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/phoneNumber" />
+        app:layout_constraintStart_toStartOf="@+id/phoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/teal_200"
+        android:text="@string/tasdiqlash"
+        android:textSize="18sp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

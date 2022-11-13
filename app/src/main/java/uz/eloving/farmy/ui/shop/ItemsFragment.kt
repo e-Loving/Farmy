@@ -1,41 +1,55 @@
 package uz.eloving.farmy.ui.shop
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
 import kotlinx.coroutines.*
 import uz.eloving.farmy.adapter.AdapterItems
-import uz.eloving.farmy.databinding.ActivityItemsBinding
+import uz.eloving.farmy.databinding.FragmentItemsBinding
 import uz.eloving.farmy.db.ShopDatabase
 import uz.eloving.farmy.model.ShopItemModel
+import uz.eloving.farmy.ui.MainActivity
 
-class ItemsActivity : AppCompatActivity() {
+class ItemsFragment : Fragment() {
     private lateinit var adapter: AdapterItems
-    private lateinit var binding: ActivityItemsBinding
+    private lateinit var binding: FragmentItemsBinding
     private val db by lazy { ShopDatabase }
     private lateinit var databaseReference: DatabaseReference
     private var list = listOf<ShopItemModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityItemsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        adapter = AdapterItems(this)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentItemsBinding.inflate(inflater, container, false)
+        adapter = AdapterItems(requireContext())
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         cacheToList()
         binding.refresh.setOnRefreshListener {
             fetchData()
             binding.refresh.isRefreshing = false
         }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                }
+            })
+        return binding.root
     }
 
     private fun fetchData() {
         databaseReference = FirebaseDatabase.getInstance()
-            .getReference(intent.getStringExtra("category").toString())
+            .getReference(requireArguments().getString("category").toString())
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 updateCache(dataSnapshot)
@@ -49,14 +63,13 @@ class ItemsActivity : AppCompatActivity() {
         binding.refresh.isRefreshing = false
     }
 
-
     @OptIn(DelicateCoroutinesApi::class)
     private fun cacheToList() {
         GlobalScope.launch {
             withContext(Dispatchers.Main) {
-                db.getDatabase(this@ItemsActivity).shopDao()
-                    .getByCategory(intent.getStringExtra("category").toString())
-                    .observe(this@ItemsActivity) {
+                db.getDatabase(requireContext()).shopDao()
+                    .getByCategory(requireArguments().getString("category").toString())
+                    .observe(viewLifecycleOwner) {
                         list = it
                         adapter.updateList(it)
                     }
@@ -66,8 +79,8 @@ class ItemsActivity : AppCompatActivity() {
 
     private suspend fun updateCategory() =
         withContext(Dispatchers.Default) {
-            db.getDatabase(this@ItemsActivity).shopDao()
-                .updateCategory(intent.getStringExtra("category").toString())
+            db.getDatabase(requireContext()).shopDao()
+                .updateCategory(requireArguments().getString("category").toString())
         }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -76,7 +89,7 @@ class ItemsActivity : AppCompatActivity() {
             updateCategory()
             for (item in dataSnapshot.children) {
                 item.getValue(ShopItemModel::class.java)?.let {
-                    db.getDatabase(this@ItemsActivity).shopDao().insertItem(it)
+                    db.getDatabase(requireContext()).shopDao().insertItem(it)
                 }
             }
         }
@@ -84,8 +97,5 @@ class ItemsActivity : AppCompatActivity() {
         adapter.updateList(list)
     }
 
-
-    private fun String.asToast() {
-        Toast.makeText(this@ItemsActivity, this, Toast.LENGTH_SHORT).show()
-    }
+    private fun String.asToast() = Toast.makeText(requireContext(), this, Toast.LENGTH_SHORT).show()
 }

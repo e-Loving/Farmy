@@ -58,7 +58,6 @@ class GardenFragment : Fragment() {
         binding.fab.setOnClickListener {
             resultLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
         }
-        binding.tvName.text = PrefManager.getUsername(requireContext())
 
         categorization =
             Categorization(

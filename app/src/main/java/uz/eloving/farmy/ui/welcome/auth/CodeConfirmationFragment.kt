@@ -1,40 +1,45 @@
-package uz.eloving.farmy.ui.auth
+package uz.eloving.farmy.ui.welcome.auth
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import uz.eloving.farmy.R
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import uz.eloving.farmy.data.PrefManager
-import uz.eloving.farmy.databinding.ActivityCodeConfirmationBinding
+import uz.eloving.farmy.databinding.FragmentCodeConfirmationBinding
 import java.util.concurrent.TimeUnit
 
-class CodeConfirmationActivity : AppCompatActivity() {
+class CodeConfirmationFragment : Fragment() {
+    private lateinit var binding: FragmentCodeConfirmationBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var otp: String
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var phoneNumber: String
     private lateinit var tempNumber: String
     private var isExpired = false
-    private lateinit var binding: ActivityCodeConfirmationBinding
 
     @SuppressLint("SetTextI18n")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityCodeConfirmationBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentCodeConfirmationBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
-        otp = intent.getStringExtra("OTP").toString()
-        resendToken = intent.getParcelableExtra("resendToken")!!
-        phoneNumber = intent.getStringExtra("phoneNumber")!!
-        tempNumber = intent.getStringExtra("tempNumber")!!
+        otp = arguments?.getString("OTP").toString()
+        resendToken = arguments?.getParcelable("resendToken")!!
+        phoneNumber = arguments?.getString("phoneNumber")!!
+        tempNumber = arguments?.getString("tempNumber")!!
         binding.phoneNumber.text = "Sizning telefon raqamingiz\n${phoneNumber}"
         startTimer()
         binding.ivBack.setOnClickListener { onBackPressed() }
@@ -48,23 +53,24 @@ class CodeConfirmationActivity : AppCompatActivity() {
                         )
                         signInWithPhoneAuthCredential(credential)
                     } else {
-                        Toast.makeText(this, "Kod noto'g'ri !", Toast.LENGTH_SHORT).show()
+                        "Kod noto'g'ri !".asToast()
                     }
                 } else {
-                    Toast.makeText(this, "Iltimos kod kiriting !", Toast.LENGTH_SHORT).show()
+                    "Iltimos kod kiriting !".asToast()
                 }
             } else {
                 binding.etPinView.setText("")
                 resendVerificationCode()
             }
         }
+        return binding.root
     }
 
     private fun resendVerificationCode() {
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber(tempNumber)
             .setTimeout(120L, TimeUnit.SECONDS)
-            .setActivity(this)
+            .setActivity(requireActivity())
             .setCallbacks(callbacks)
             .setForceResendingToken(resendToken)
             .build()
@@ -97,27 +103,24 @@ class CodeConfirmationActivity : AppCompatActivity() {
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
+            .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    PrefManager.saveUID(this, auth.currentUser?.uid.toString())
-                    Toast.makeText(this, "Authenticate Successfully", Toast.LENGTH_SHORT).show()
+                    PrefManager.saveUID(requireContext(), auth.currentUser?.uid.toString())
+                    "Authenticate Successfully".asToast()
                     sendToRegister()
                 } else {
-
-                    Log.d("TAG", "signInWithPhoneAuthCredential: ${task.exception.toString()}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(this, "Xatolik, qaytadan urining !", Toast.LENGTH_SHORT)
-                            .show()
+                        "Xatolik, qaytadan urining !".asToast()
                     }
                 }
             }
     }
 
     private fun sendToRegister() {
-        val intent = Intent(this, SigninActivity::class.java)
-        intent.putExtra("phoneNumber", phoneNumber)
-        startActivity(intent)
-        finish()
+        val fragment = SigninFragment()
+        fragment.arguments = bundleOf(Pair("reg", false))
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.welcome_container, fragment)?.commit()
     }
 
     @SuppressLint("SetTextI18n")
@@ -151,4 +154,8 @@ class CodeConfirmationActivity : AppCompatActivity() {
         val minutes = totalMinutes % minutesInAnHour
         return "$minutes : $seconds"
     }
+
+    private fun onBackPressed() = activity?.supportFragmentManager?.popBackStack()
+    private fun String.asToast() = Toast.makeText(requireContext(), this, Toast.LENGTH_SHORT).show()
+
 }

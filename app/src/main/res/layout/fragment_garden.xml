@@ -6,77 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".ui.garden.GardenFragment">
 
-    <TextView
-        android:id="@+id/tv_greeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:text="Xayrli kun"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="75dp" />
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Islom, Sheraliyev"
-        android:textColor="@color/textDay"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/tv_greeting"
-        app:layout_constraintTop_toBottomOf="@+id/tv_greeting" />
-
-    <ImageView
-        android:id="@+id/iv_cart"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="30dp"
-        android:src="@drawable/cart"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_liked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_liked"
-        app:tint="@color/textDay" />
-
-    <ImageView
-        android:id="@+id/iv_liked"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="30dp"
-        android:src="@drawable/heart"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
-        app:layout_constraintEnd_toStartOf="@id/iv_cart"
-        app:layout_constraintTop_toTopOf="@+id/tv_name"
-        app:tint="@color/textDay" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/search"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/background_search"
         android:drawableStart="@drawable/search"
         android:drawablePadding="10dp"
         android:hint="Qidiring..."
+        android:imeOptions="actionSearch"
         android:inputType="text"
         android:maxLines="1"
-        android:imeOptions="actionSearch"
         android:paddingStart="10dp"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@+id/iv_liked"
-        app:layout_constraintStart_toStartOf="@+id/tv_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        app:layout_constraintEnd_toStartOf="@+id/more"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry" />
 
     <ImageView
         android:id="@+id/more"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginEnd="30dp"
         android:src="@drawable/ic_baseline_more_vert_24"
         app:layout_constraintBottom_toBottomOf="@+id/search"
-        app:layout_constraintEnd_toEndOf="@+id/iv_cart"
-        app:layout_constraintStart_toStartOf="@+id/iv_cart"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/search"
         app:tint="@color/textDay" />
 
@@ -84,18 +42,17 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/ic_baseline_photo_camera_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/more"
         app:tint="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_garden"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/more"
         app:layout_constraintStart_toStartOf="@+id/search"

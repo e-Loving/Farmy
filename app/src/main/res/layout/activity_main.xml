@@ -4,16 +4,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_greeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/inter"
+                android:text="Xayrli kun" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:fontFamily="@font/inter"
+                android:text="eLoving"
+                android:textColor="@color/textDay"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp"
+            android:gravity="center|bottom"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_cart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/cart"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_liked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/iv_liked"
+                app:tint="@color/textDay" />
+
+            <ImageView
+                android:id="@+id/iv_liked"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/heart"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                app:layout_constraintEnd_toStartOf="@id/iv_cart"
+                app:layout_constraintTop_toTopOf="@+id/tv_name"
+                app:tint="@color/textDay" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.Toolbar>
+
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:elevation="10dp"
+        app:backgroundColor="@color/smoothbar"
         app:cornerRadius="20dp"
         app:duration="400"
         app:iconSize="25dp"
         app:iconTint="@color/smoothbaricon"
-        app:backgroundColor="@color/smoothbar"
         app:indicatorColor="@color/teal_200"
         app:indicatorRadius="15dp"
         app:itemFontFamily="@font/inter"
@@ -26,11 +95,11 @@
         android:id="@+id/nav_host_fragment_activity_main"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:navGraph="@navigation/mobile_navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

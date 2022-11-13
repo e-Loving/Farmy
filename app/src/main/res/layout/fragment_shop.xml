@@ -8,164 +8,46 @@
     tools:context=".ui.shop.ShopFragment">
 
 
-    <TextView
-        android:id="@+id/tv_greeting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:text="Xayrli kun"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="75dp" />
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Islom, Sheraliyev"
-        android:textColor="@color/textDay"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/tv_greeting"
-        app:layout_constraintTop_toBottomOf="@+id/tv_greeting" />
-
-    <ImageView
-        android:id="@+id/iv_cart"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="30dp"
-        android:src="@drawable/cart"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_liked"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_liked"
-        app:tint="@color/textDay"/>
-
-    <ImageView
-        android:id="@+id/iv_liked"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="30dp"
-        android:src="@drawable/heart"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
-        app:layout_constraintEnd_toStartOf="@id/iv_cart"
-        app:layout_constraintTop_toTopOf="@+id/tv_name"
-        app:tint="@color/textDay" />
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editText"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:maxLines="1"
         android:background="@drawable/background_search"
         android:drawableStart="@drawable/search"
         android:drawablePadding="10dp"
-        android:paddingStart="10dp"
-        android:imeOptions="actionSearch"
         android:hint="Qidiring..."
+        android:imeOptions="actionSearch"
         android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="10dp"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@id/iv_cart"
-        app:layout_constraintStart_toStartOf="@+id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="20dp"
         android:foregroundGravity="center"
         android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
         app:tint="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategory"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:paddingHorizontal="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editText"
         tools:listitem="@layout/item_category" />
-
-    <!--    <LinearLayout-->
-<!--        android:id="@+id/ly_fruits"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/editText">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Mevalar"-->
-<!--            android:textSize="24sp"-->
-<!--            android:layout_marginLeft="20dp"-->
-<!--            android:textColor="@color/black"/>-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="20dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            app:cardBackgroundColor="#e5e5e5"-->
-<!--            app:cardCornerRadius="20dp">-->
-
-
-<!--            <ImageView-->
-<!--                android:id="@+id/itemCategory"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="10dp"-->
-<!--                android:src="@drawable/fruit" />-->
-<!--        </androidx.cardview.widget.CardView>-->
-
-
-<!--    </LinearLayout>-->
-<!--    <LinearLayout-->
-<!--        android:id="@+id/ly_vegatable"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/ly_vegatable">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Mevalar"-->
-<!--            android:textSize="24sp"-->
-<!--            android:layout_marginLeft="20dp"-->
-<!--            android:textColor="@color/black"/>-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="20dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            app:cardBackgroundColor="#e5e5e5"-->
-<!--            app:cardCornerRadius="20dp">-->
-
-
-<!--            <ImageView-->
-<!--                android:id="@+id/itemVega"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="10dp"-->
-<!--                android:src="@drawable/fruit" />-->
-<!--        </androidx.cardview.widget.CardView>-->
-
-
-<!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

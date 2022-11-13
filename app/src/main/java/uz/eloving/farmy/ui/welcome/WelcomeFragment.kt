@@ -1,34 +1,24 @@
 package uz.eloving.farmy.ui.welcome
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import uz.eloving.farmy.ui.auth.AuthActivity
-import uz.eloving.farmy.model.UIModel
+import uz.eloving.farmy.adapter.WelcomeFragmentAdapter
 import uz.eloving.farmy.databinding.FragmentWelcomeBinding
 
-class WelcomeFragment(private val all: UIModel) : Fragment() {
+class WelcomeFragment : Fragment() {
+    private lateinit var adapter: WelcomeFragmentAdapter
     private lateinit var binding: FragmentWelcomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentWelcomeBinding.inflate(inflater, container, false)
-        binding.lottieAnimationView.setAnimation(all.lottie_animation)
-        binding.tvDescription.text = all.description
-        binding.tvTitle.text = all.title
-        binding.btnNext.visibility = if (all.nextButtonVisibility) View.VISIBLE else View.GONE
-        binding.btnNext.setOnClickListener {
-            startActivity(
-                Intent(
-                    context,
-                    AuthActivity::class.java
-                )
-            )
-        }
+        adapter = WelcomeFragmentAdapter(requireActivity())
+        binding.viewPager2.adapter = adapter
+        binding.dots.attachTo(binding.viewPager2)
         return binding.root
     }
 }

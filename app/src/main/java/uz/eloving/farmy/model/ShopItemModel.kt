@@ -9,7 +9,7 @@ data class ShopItemModel(
     val price: Float? = null,
     val imageDownloadUrl: String? = null,
     val type: String? = null,
-    val per: String,
+    val per: String? = null,
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 )

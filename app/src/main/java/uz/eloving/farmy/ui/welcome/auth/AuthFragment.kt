@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.google.firebase.FirebaseApp
@@ -15,6 +14,8 @@ import uz.eloving.farmy.R
 import uz.eloving.farmy.databinding.FragmentAuthBinding
 import uz.eloving.farmy.ui.welcome.WelcomeFragment
 import uz.eloving.farmy.util.ProgressDialog
+import uz.eloving.farmy.util.Utils.Companion.asToast
+import uz.eloving.farmy.util.Utils.Companion.onBackPressedListener
 import uz.eloving.farmy.util.hide
 import uz.eloving.farmy.util.show
 import java.util.concurrent.TimeUnit
@@ -33,9 +34,14 @@ class AuthFragment : Fragment() {
         FirebaseApp.initializeApp(requireContext())
         auth = FirebaseAuth.getInstance()
         dialogProgress = ProgressDialog()
+        onBackPressedListener(requireActivity(), R.id.welcome_container, WelcomeFragment())
         binding.ivBack.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.welcome_container, WelcomeFragment())?.commit()
+            onBackPressedListener(
+                requireActivity(),
+                R.id.welcome_container,
+                WelcomeFragment(),
+                true
+            )
         }
         binding.sendOTPBtn.setOnClickListener {
             sendCode()
@@ -50,11 +56,11 @@ class AuthFragment : Fragment() {
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
-                "Xush kelibsiz !".asToast()
+                "Xush kelibsiz !".asToast(requireActivity())
                 toReg(true)
             } else {
                 if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                    "Xatolik !".asToast()
+                    "Xatolik !".asToast(requireActivity())
                 }
             }
         }
@@ -68,9 +74,9 @@ class AuthFragment : Fragment() {
 
         override fun onVerificationFailed(e: FirebaseException) {
             if (e is FirebaseAuthInvalidCredentialsException) {
-                "Raqam noto'g'ri".asToast()
+                "Raqam noto'g'ri".asToast(requireActivity())
             } else if (e is FirebaseTooManyRequestsException) {
-                "Iltimos birozdan so'ng harakat qiling".asToast()
+                "Iltimos birozdan so'ng harakat qiling".asToast(requireActivity())
             }
         }
 
@@ -86,7 +92,7 @@ class AuthFragment : Fragment() {
                 Pair("tempNumber", tempNumber)
             )
             dialogProgress.hide()
-            toCodeConfirmation(fragment)
+            onBackPressedListener(requireActivity(), R.id.welcome_container, fragment, true)
         }
     }
 
@@ -103,20 +109,13 @@ class AuthFragment : Fragment() {
                     .build()
                 PhoneAuthProvider.verifyPhoneNumber(options)
                 dialogProgress.show(parentFragmentManager)
-            } else "Raqam noto'g'ri".asToast()
-        } else "Raqamingizni kiriting !".asToast()
+            } else "Raqam noto'g'ri".asToast(requireActivity())
+        } else "Raqamingizni kiriting !".asToast(requireActivity())
     }
 
-    private fun String.asToast() = Toast.makeText(requireContext(), this, Toast.LENGTH_SHORT).show()
     private fun toReg(reg: Boolean) {
         val fragment = SigninFragment()
         fragment.arguments = bundleOf(Pair("reg", reg))
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.welcome_container, fragment)?.commit()
-    }
-
-    private fun toCodeConfirmation(fragment: Fragment) {
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.welcome_container, fragment)?.commit()
+        onBackPressedListener(requireActivity(), R.id.welcome_container, fragment, true)
     }
 }

@@ -6,15 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import uz.eloving.farmy.R
 import uz.eloving.farmy.ui.MainActivity
 import uz.eloving.farmy.data.PrefManager
 import uz.eloving.farmy.databinding.FragmentSigninBinding
 import uz.eloving.farmy.model.UserModel
 import uz.eloving.farmy.util.ProgressDialog
+import uz.eloving.farmy.util.Utils.Companion.asToast
+import uz.eloving.farmy.util.Utils.Companion.onBackPressedListener
 import uz.eloving.farmy.util.hide
 import uz.eloving.farmy.util.show
 
@@ -30,7 +32,7 @@ class SigninFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         val dialog = ProgressDialog()
         binding.ivBackSignIn.setOnClickListener {
-            activity?.supportFragmentManager?.popBackStack()
+            onBackPressedListener(requireActivity(), R.id.welcome_container, AuthFragment(), true)
         }
         binding.signlogin.setOnClickListener {
             if (binding.usernamelogin.text?.length!! > 3 && binding.passwordlogin.text?.length!! >= 6) {
@@ -47,7 +49,7 @@ class SigninFragment : Fragment() {
                             )
                             startMainActivity()
                         } else {
-                            "Bunday xisob mavjud emas".asToast()
+                            "Bunday xisob mavjud emas".asToast(requireActivity())
                             dialog.hide()
                         }
                     }
@@ -70,7 +72,7 @@ class SigninFragment : Fragment() {
                                 )
                             ).addOnCompleteListener {
                                 if (it.isSuccessful) {
-                                    "Muvaffaqiyatli yakunlandi".asToast()
+                                    "Muvaffaqiyatli yakunlandi".asToast(requireActivity())
                                     PrefManager.saveUsername(
                                         requireContext(),
                                         binding.usernamelogin.text.toString()
@@ -78,27 +80,23 @@ class SigninFragment : Fragment() {
                                     dialog.hide()
                                     startMainActivity()
                                 } else {
-                                    "Muammo yuzaga keldi".asToast()
+                                    "Muammo yuzaga keldi".asToast(requireActivity())
                                     dialog.hide()
                                 }
                             }
                         } else {
-                            "Bu nom band qilingan".asToast()
+                            "Bu nom band qilingan".asToast(requireActivity())
                             dialog.hide()
                         }
                     }
                 }
             } else {
-                "Ma'lumotlar juda qisqa".asToast()
-                dialog.hide()
+                "Ma'lumotlar juda qisqa".asToast(requireActivity())
             }
         }
         return binding.root
     }
 
-    private fun String.asToast() = Toast.makeText(requireContext(), this, Toast.LENGTH_SHORT).show()
     private fun startMainActivity() =
         startActivity(Intent(requireActivity(), MainActivity::class.java))
-
-
 }

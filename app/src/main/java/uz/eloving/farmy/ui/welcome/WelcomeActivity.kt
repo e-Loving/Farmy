@@ -11,6 +11,8 @@ class WelcomeActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportFragmentManager.beginTransaction().replace(R.id.welcome_container, WelcomeFragment()).commit()
+        // If either one fragment of ()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.welcome_container, WelcomeFragment()).commit()
     }
 }

@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import uz.eloving.farmy.R
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import com.google.firebase.FirebaseException
@@ -18,6 +17,8 @@ import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import uz.eloving.farmy.data.PrefManager
 import uz.eloving.farmy.databinding.FragmentCodeConfirmationBinding
+import uz.eloving.farmy.util.Utils.Companion.asToast
+import uz.eloving.farmy.util.Utils.Companion.onBackPressedListener
 import java.util.concurrent.TimeUnit
 
 class CodeConfirmationFragment : Fragment() {
@@ -37,12 +38,16 @@ class CodeConfirmationFragment : Fragment() {
         binding = FragmentCodeConfirmationBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
         otp = arguments?.getString("OTP").toString()
+        @Suppress("DEPRECATION")
         resendToken = arguments?.getParcelable("resendToken")!!
         phoneNumber = arguments?.getString("phoneNumber")!!
         tempNumber = arguments?.getString("tempNumber")!!
         binding.phoneNumber.text = "Sizning telefon raqamingiz\n${phoneNumber}"
         startTimer()
-        binding.ivBack.setOnClickListener { onBackPressed() }
+        onBackPressedListener(requireActivity(), R.id.welcome_container, AuthFragment())
+        binding.ivBack.setOnClickListener {
+            onBackPressedListener(requireActivity(), R.id.welcome_container, AuthFragment(), true)
+        }
         binding.btnVerify.setOnClickListener {
             if (!isExpired) {
                 val typedOTP = binding.etPinView.text!!
@@ -53,10 +58,10 @@ class CodeConfirmationFragment : Fragment() {
                         )
                         signInWithPhoneAuthCredential(credential)
                     } else {
-                        "Kod noto'g'ri !".asToast()
+                        "Kod noto'g'ri !".asToast(requireActivity())
                     }
                 } else {
-                    "Iltimos kod kiriting !".asToast()
+                    "Iltimos kod kiriting !".asToast(requireActivity())
                 }
             } else {
                 binding.etPinView.setText("")
@@ -106,11 +111,11 @@ class CodeConfirmationFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     PrefManager.saveUID(requireContext(), auth.currentUser?.uid.toString())
-                    "Authenticate Successfully".asToast()
+                    "Authenticate Successfully".asToast(requireActivity())
                     sendToRegister()
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        "Xatolik, qaytadan urining !".asToast()
+                        "Xatolik, qaytadan urining !".asToast(requireActivity())
                     }
                 }
             }
@@ -118,9 +123,8 @@ class CodeConfirmationFragment : Fragment() {
 
     private fun sendToRegister() {
         val fragment = SigninFragment()
-        fragment.arguments = bundleOf(Pair("reg", false))
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.welcome_container, fragment)?.commit()
+        fragment.arguments = bundleOf(Pair("reg", true), Pair("phoneNumber", phoneNumber))
+        onBackPressedListener(requireActivity(), R.id.welcome_container, fragment, true)
     }
 
     @SuppressLint("SetTextI18n")
@@ -154,8 +158,5 @@ class CodeConfirmationFragment : Fragment() {
         val minutes = totalMinutes % minutesInAnHour
         return "$minutes : $seconds"
     }
-
-    private fun onBackPressed() = activity?.supportFragmentManager?.popBackStack()
-    private fun String.asToast() = Toast.makeText(requireContext(), this, Toast.LENGTH_SHORT).show()
 
 }
